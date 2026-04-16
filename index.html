@@ -24,77 +24,65 @@
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; min-height: 100vh; overflow-x: hidden; }
-    
     /* =======================
        PRELOADER & OVERLAY
        ======================= */
     .preloader { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #050508; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
     .loader-pulse { animation: pulseLogo 0.8s infinite alternate; }
     @keyframes pulseLogo { from { transform: scale(0.9); filter: drop-shadow(0 0 10px rgba(251,255,0,0)); } to { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--neon)); } }
-    
-    /* ANIMATED GIF BACKGROUND FOR THE ENTIRE WEB APP PORTAL */
-    .bg-overlay { 
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; 
-        background: url('https://i.gifer.com/Xqg8.gif') center/cover; 
-        filter: brightness(0.2) contrast(1.2); 
-    }
-
+    .bg-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; background-size: cover; background-position: center; filter: brightness(0.2) blur(6px); }
     /* =======================
        HEADER & MISC UI
        ======================= */
-    .header { padding: calc(10px + env(safe-area-inset-top)) 14px 12px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; gap: 8px; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+    .header { padding: calc(10px + env(safe-area-inset-top)) 14px 12px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; gap: 8px; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 100; }
     .logo-img { width: 54px; height: 54px; object-fit: contain; border-radius: 8px; }
     .founder-img { width: 54px; height: 54px; border-radius: 50%; border: 2px solid var(--neon); object-fit: cover; justify-self: end; }
     .header-title { text-align: center; }
     .header-title h1 { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: white; line-height: 1.2; }
     .header-title p { font-size: 8px; color: var(--neon); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; opacity: .9; }
     .header-title small { font-size: 7.5px; color: rgba(255,255,255,0.35); letter-spacing: 1px; text-transform: uppercase; display: block; }
-    #sync-status { position: fixed; bottom: 12px; right: 12px; font-size: 8px; font-weight: 900; text-transform: uppercase; padding: 4px 8px; border-radius: 20px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.08); z-index: 200; backdrop-filter: blur(5px); }
+    #sync-status { position: fixed; bottom: 12px; right: 12px; font-size: 8px; font-weight: 900; text-transform: uppercase; padding: 4px 8px; border-radius: 20px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.08); z-index: 200; }
     .status-live { color: var(--green) !important; border-color: rgba(0,255,136,.3) !important; }
     .status-offline { color: var(--red) !important; border-color: rgba(255,65,108,.3) !important; }
-    
     /* =======================
        DEPARTMENT GRID
        ======================= */
     #dept-gate { padding: 20px 14px; max-width: 900px; margin: auto; }
-    .gate-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+    .gate-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 20px; }
     .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
-    .dept-card { background: rgba(10,10,15,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 22px 10px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 30px rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
-    .dept-card:active { transform: scale(0.92); box-shadow: 0 0 20px rgba(251,255,0,.3); border-color: rgba(251,255,0,0.5); }
+    .dept-card { background: rgba(20,20,25,0.95); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 22px 10px; text-align: center; cursor: pointer; transition: transform 0.15s; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+    .dept-card:active { transform: scale(0.92); box-shadow: 0 0 20px rgba(251,255,0,.3); }
     .dept-card-icon { font-size: 32px; margin-bottom: 8px; }
     .dept-card b { display: block; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; word-wrap: break-word; }
     .dept-card-bar { height: 3px; background: linear-gradient(90deg, var(--neon), var(--accent)); border-radius: 3px; margin: 10px auto 0; width: 80%; opacity: .8; }
-    
     /* =======================
        LOGIN MODAL
        ======================= */
     #login-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-    .modal-box { background: rgba(15,15,20,0.95); border: 1px solid rgba(251,255,0,.4); border-radius: 24px; padding: 32px 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 0 60px rgba(251,255,0,.15); }
+    .modal-box { background: rgba(20,20,25,1); border: 1px solid rgba(251,255,0,.4); border-radius: 24px; padding: 32px 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 0 60px rgba(251,255,0,.15); }
     .modal-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--neon); letter-spacing: 3px; margin-bottom: 20px; }
     input, select, textarea { width: 100%; padding: 14px 16px; margin: 8px 0; background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; font-size: 16px; font-family: inherit; transition: border-color 0.2s; }
     input:focus, select:focus, textarea:focus { border-color: var(--neon); outline: none; background: rgba(251,255,0,.08); }
     textarea { resize: none; min-height: 50px; font-size: 14px; }
     option { background: #1a1a1a; color: white; }
-    .btn-main { width: 100%; padding: 16px; border-radius: 12px; background: var(--neon); color: black; font-weight: 900; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 18px; margin-top: 5px; box-shadow: 0 5px 15px rgba(251,255,0,0.2); transition: all 0.2s; }
-    .btn-main:active { transform: scale(0.95); box-shadow: none; }
-    
+    .btn-main { width: 100%; padding: 16px; border-radius: 12px; background: var(--neon); color: black; font-weight: 900; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 18px; margin-top: 5px; }
     /* =======================
        TEACHER VIEW & ADMIN
        ======================= */
     #teacher-view { max-width: 600px; margin: auto; padding-bottom: 40px; }
-    .scoreboard { padding: 16px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .sb-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; text-align: center; font-weight: 900; }
+    .scoreboard { padding: 16px; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .sb-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; text-align: center; }
     .score-strip { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
-    .score-chip { flex: 0 0 auto; min-width: 80px; background: rgba(255,255,255,0.05); border-radius: 14px; padding: 10px 14px; text-align: center; border-top: 3px solid #333; position: relative; backdrop-filter: blur(5px); }
-    .score-chip.leader { box-shadow: 0 0 20px var(--chip-color, #888); background: rgba(255,255,255,0.1); }
-    .chip-name { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.8); }
-    .chip-score { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1.1; color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+    .score-chip { flex: 0 0 auto; min-width: 80px; background: rgba(255,255,255,0.04); border-radius: 14px; padding: 10px 14px; text-align: center; border-top: 3px solid #333; position: relative; }
+    .score-chip.leader { box-shadow: 0 0 20px var(--chip-color, #888); }
+    .chip-name { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); }
+    .chip-score { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1.1; color: white; }
     .chip-rank { font-size: 14px; position: absolute; top: -8px; right: -4px; }
-    .t-panel { margin: 16px; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 16px 14px; box-shadow: 0 10px 50px rgba(0,0,0,0.9); }
+    .t-panel { margin: 16px; background: rgba(10,10,18,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 16px 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
     
     /* Medal Tiers & Buttons */
     .medal-section { margin-bottom: 16px; }
-    .medal-section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 900; text-align: center; margin-bottom: 12px; }
+    .medal-section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 12px; }
     .medal-row { display: flex; gap: 8px; justify-content: center; align-items: flex-end; margin-bottom: 8px; }
     .medal-btn { position: relative; border: none; cursor: pointer; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; color: #000; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
     .medal-btn:active { transform: scale(0.88) !important; }
@@ -122,32 +110,29 @@
     .tier-indicator { text-align: center; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 8px; border-radius: 10px; margin-bottom: 16px; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: var(--gold); transition: all 0.3s; }
     .tier-indicator.negative { background: rgba(255,65,108,0.1); border-color: rgba(255,65,108,0.3); color: var(--red); }
     .house-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .house-btn { padding: 28px 4px; border-radius: 16px; border: none; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: black; cursor: pointer; position: relative; box-shadow: inset 0 2px 10px rgba(255,255,255,0.4), 0 5px 15px rgba(0,0,0,0.4); text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
-    .house-btn:active { transform: scale(0.94); box-shadow: inset 0 5px 15px rgba(0,0,0,0.5); }
+    .house-btn { padding: 28px 4px; border-radius: 16px; border: none; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: black; cursor: pointer; position: relative; }
+    .house-btn:active { transform: scale(0.94); }
     .scan-area { text-align: center; margin-bottom: 14px; }
-    #cam-btn { background: linear-gradient(135deg, var(--neon), #e8ff00); border: none; padding: 0; width: 80px; height: 80px; border-radius: 50%; font-size: 30px; cursor: pointer; box-shadow: 0 0 20px rgba(251,255,0,0.2); transition: transform 0.2s; }
-    #cam-btn:active { transform: scale(0.9); }
-    .scan-hint { font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+    #cam-btn { background: linear-gradient(135deg, var(--neon), #e8ff00); border: none; padding: 0; width: 80px; height: 80px; border-radius: 50%; font-size: 30px; cursor: pointer; }
+    .scan-hint { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
     #reader { border-radius: 16px; overflow: hidden; border: 2px solid var(--neon); margin-bottom: 14px; }
     .manual-row { display: flex; gap: 8px; margin-bottom: 6px; }
-    .btn-sub { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; width: 100%; margin-bottom: 14px; letter-spacing: 1px; transition: all 0.2s; }
-    .btn-sub:hover { background: rgba(255,255,255,0.2); }
+    .btn-sub { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; width: 100%; margin-bottom: 14px; letter-spacing: 1px; }
     .remarks-wrap { margin-bottom: 14px; }
-    .remarks-label { font-size: 9px; letter-spacing: 2px; font-weight: 900; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .remarks-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
     
     /* ADMIN ACTIONS */
     .admin-section { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .btn-admin { padding: 14px 10px; border-radius: 12px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); font-weight: 900; cursor: pointer; font-size: 12px; letter-spacing: 1px; font-family: inherit; transition: transform 0.2s; }
-    .btn-admin:hover { transform: translateY(-2px); }
+    .btn-admin { padding: 14px 10px; border-radius: 12px; background: transparent; font-weight: 900; cursor: pointer; font-size: 12px; letter-spacing: 1px; font-family: inherit; }
     .upload-box { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); padding: 12px 14px; border-radius: 12px; margin-bottom: 8px; }
     .upload-box label { font-size: 10px; color: var(--accent); display: block; margin-bottom: 6px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
-    .btn-logout { width: calc(100% - 32px); margin: 16px; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: rgba(255,255,255,0.7); font-weight: 600; cursor: pointer; letter-spacing: 1px; backdrop-filter: blur(5px); }
+    .btn-logout { width: calc(100% - 32px); margin: 16px; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: rgba(255,255,255,0.7); font-weight: 600; cursor: pointer; letter-spacing: 1px; }
     
     /* =======================
        LEADERBOARD & CERT MODAL
        ======================= */
-    #lb-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5,5,8,0.95); backdrop-filter: blur(15px); flex-direction: column; z-index: 3000; overflow-x: hidden; overflow-y: auto; }
-    .lb-header { padding: 16px; background: rgba(0,0,0,0.8); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); }
+    #lb-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #050508; flex-direction: column; z-index: 3000; overflow-x: hidden; overflow-y: auto; }
+    .lb-header { padding: 16px; background: rgba(0,0,0,1); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
     .lb-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; flex: 1; }
     .lb-back { background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 900; font-size: 13px; }
     .lb-period-toggle { display: flex; gap: 10px; padding: 16px 16px 4px 16px; }
@@ -173,7 +158,7 @@
     /* =======================
        TOAST / POPUP
        ======================= */
-    #toast { position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%); background: rgba(15,15,20,0.95); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: white; padding: 14px 28px; border-radius: 50px; z-index: 5000; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; white-space: nowrap; backdrop-filter: blur(10px); }
+    #toast { position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%); background: rgba(15,15,20,0.95); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: white; padding: 14px 28px; border-radius: 50px; z-index: 5000; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; white-space: nowrap; }
     #toast.show { bottom: 28px; opacity: 1; }
     .shimmer { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmerFlow 1.5s infinite linear; border-radius: 8px; }
     @keyframes shimmerFlow { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
@@ -231,13 +216,13 @@
   </div>
 
   <!-- CERTIFICATE GENERATOR MODAL -->
-  <div id="cert-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(5,5,8,0.95); backdrop-filter: blur(20px); z-index:4000; overflow-y:auto; padding-bottom:50px;">
+  <div id="cert-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#050508; z-index:4000; overflow-y:auto; padding-bottom:50px;">
     <div class="lb-header">
       <button class="lb-back" onclick="closeCertDashboard()">← BACK</button>
       <h2 id="cert-title" style="font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:2px; flex:1;">CERTIFICATES</h2>
     </div>
     <div style="padding:20px; max-width:800px; margin:0 auto;">
-      <button class="btn-main" onclick="generateCertificates()" style="background:linear-gradient(to right, #d4af37, #ffd700); color:#000; margin-bottom:20px; font-size:16px;">🖨️ GENERATE & VIEW CERTIFICATES</button>
+      <button class="btn-main" onclick="generateCertificates()" style="background:linear-gradient(to right, #d4af37, #ffd700); color:#000; margin-bottom:20px; font-size:16px;">🖨️ GENERATE A5 CERTIFICATES</button>
       <div id="cert-list"></div>
     </div>
   </div>
@@ -336,8 +321,7 @@
         <div id="admin-branding" style="display:none; margin-top:4px; padding-top:16px; border-top:1px dashed rgba(255,255,255,.2);">
           <div class="upload-box"><label>Logo</label><input type="file" onchange="handleFile(this,'Logo_ID')" accept="image/*"></div>
           <div class="upload-box"><label>Founder</label><input type="file" onchange="handleFile(this,'Founder_ID')" accept="image/*"></div>
-          <div class="upload-box"><label>Portal Background</label><input type="file" onchange="handleFile(this,'Background_ID')" accept="image/*"></div>
-          <div class="upload-box"><label>Certificate GIF Background</label><input type="file" onchange="handleFile(this,'CertBg_ID')" accept="image/*"></div>
+          <div class="upload-box"><label>Background</label><input type="file" onchange="handleFile(this,'Background_ID')" accept="image/*"></div>
         </div>
       </div>
     </div>
@@ -356,7 +340,7 @@
     /* ============================================================
        CONFIG
     ============================================================ */
-    const API = "https://script.google.com/macros/s/AKfycbxN8k_wRPEZEe_xkl71r7P7faXr6fPIIIfsWbtdegDrtk2t5TfPPgUbyyQpBYTWUSu35A/exec";
+    const API = "https://script.google.com/macros/s/AKfycbxxk6bjMCVUuMThq16M3KsJqqfIqudP3fxccYGRbhy7hVNjSI9SdBQN1-XTvzJfzs_o6w/exec";
     
     /* ============================================================
        GLOBAL STATE
@@ -482,10 +466,7 @@
       if (!data) return;
       const { images, houseConfig, deptList, categories, appLinks } = data;
       adminCats = categories || []; globalDeptList = deptList || []; globalAppLinks = appLinks || [];
-      
-      // Portal Background image override is disabled so the gorgeous GIF background always shines!
-      // if (images && images.bg) document.getElementById('main-bg').style.backgroundImage = `url('${images.bg}')`;
-      
+      if (images && images.bg) document.getElementById('main-bg').style.backgroundImage = `url('${images.bg}')`;
       if (images && images.logo) document.getElementById('m-logo').src = images.logo;
       if (images && images.founder) document.getElementById('m-founder').src = images.founder;
       document.getElementById('dept-grid').innerHTML = globalDeptList.map(d => `<div class="dept-card" onclick="handleCard('${d}')"><div class="dept-card-icon">${getIcon(d)}</div><b>${d}</b><div class="dept-card-bar"></div></div>`).join('');
@@ -734,16 +715,12 @@
         let logoUrl = cache.images && cache.images.logo ? cache.images.logo : '';
         let founderUrl = cache.images && cache.images.founder ? cache.images.founder : '';
         
-        // Custom Uploaded Cert GIF, or Gold Dust fallback
-        let customCertBg = cache.images && cache.images.certBg ? cache.images.certBg : 'https://i.gifer.com/3Qy.gif';
-        
         // Build Premium A5 Certificate Templates
         let html = `<!DOCTYPE html>
         <html>
         <head>
             <title>G.O.A.T.S Premium Certificates</title>
             <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>
             <style>
                 * { box-sizing: border-box; margin: 0; padding: 0; }
                 body { background: #222; }
@@ -751,7 +728,7 @@
                 .cert-page {
                     width: 148mm; height: 210mm;
                     background: #000;
-                    margin: 0 auto 40px auto;
+                    margin: 0 auto;
                     position: relative;
                     page-break-after: always;
                     overflow: hidden;
@@ -765,17 +742,16 @@
                     background: radial-gradient(ellipse at center, rgba(30,20,0,1) 0%, rgba(5,5,5,1) 100%);
                     z-index: 1;
                 }
-                
-                /* CERTIFICATE ANIMATED GIF BACKGROUND (SPARKLES) */
                 .sparkles {
                     position: absolute; top:0; left:0; right:0; bottom:0; z-index: 2;
-                    background-image: url('${customCertBg}');
-                    background-size: cover;
-                    background-position: center;
-                    opacity: 0.35;
-                    mix-blend-mode: screen;
+                    background-image: 
+                        radial-gradient(circle at 10% 20%, rgba(255,215,0,0.15) 0%, transparent 10%),
+                        radial-gradient(circle at 90% 15%, rgba(255,215,0,0.2) 0%, transparent 12%),
+                        radial-gradient(circle at 15% 85%, rgba(255,200,0,0.15) 0%, transparent 10%),
+                        radial-gradient(circle at 85% 90%, rgba(255,220,0,0.15) 0%, transparent 15%),
+                        radial-gradient(circle at 50% 50%, rgba(212,175,55,0.25) 0%, transparent 50%);
+                    background-size: 100% 100%;
                 }
-                
                 .gold-border {
                     position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
                     border: 2px solid transparent;
@@ -851,11 +827,7 @@
                 }
                 .description span { color: #d4af37; font-weight: 900; font-size: 13.5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
                 
-                .download-actions { position: absolute; top: 25px; left: 25px; z-index: 1000; display:flex; gap:10px; }
-                .download-btn { background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #d4af37; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 10px; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.8); backdrop-filter: blur(5px); letter-spacing: 1px; }
-                .download-btn:hover { background: #d4af37; color: #000; transform: scale(1.05); box-shadow: 0 0 15px rgba(212,175,55,0.6); }
-
-                @media print { body { background: #fff; } .cert-page { box-shadow: none; margin-bottom: 0px; } .print-btn, .download-actions { display: none !important; } }
+                @media print { body { background: #fff; } .cert-page { box-shadow: none; } .print-btn { display: none; } }
                 
                 .print-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: linear-gradient(135deg, #d4af37, #ffd700); color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: 900; font-family: 'Montserrat', sans-serif; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 16px; transition: transform 0.2s; }
                 .print-btn:hover { transform: scale(1.05); }
@@ -865,7 +837,7 @@
             <button class="print-btn" onclick="window.print()">🖨️ PRINT CERTIFICATES (A5)</button>
         `;
 
-        certStudents.forEach((st, idx) => {
+        certStudents.forEach(st => {
             let title2 = currentCertType === 'weekly' ? 'OF THE WEEK' : 'OF THE YEAR';
             let badgeTxt = currentCertType === 'weekly' ? 'WEEKLY CHAMPION' : 'ANNUAL CHAMPION';
             let defaultPhoto = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23333\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';
@@ -876,10 +848,7 @@
             Your monumental contribution to the <span>DEPARTMENT OF ${st.dept.toUpperCase()}</span> securing a massive <span>${st.pts} POINTS</span> validates you as a true asset to this institution.`;
             
             html += `
-            <div class="cert-page" id="cert-${idx}">
-                <div class="download-actions">
-                    <button class="download-btn" onclick="downloadImage('cert-${idx}', '${st.name}')">📸 DOWNLOAD FOR SOCIAL MEDIA</button>
-                </div>
+            <div class="cert-page">
                 <div class="gold-border"></div>
                 <div class="sparkles"></div>
                 <div class="content">
@@ -914,40 +883,7 @@
             </div>`;
         });
 
-        html += `
-            <script>
-                function downloadImage(id, studentName) {
-                    const node = document.getElementById(id);
-                    const actions = node.querySelector('.download-actions');
-                    
-                    // Temporarily hide the download button to prevent it from showing up in the downloaded image
-                    if (actions) actions.style.display = 'none';
-                    
-                    // Ensure the DOM updates the display:none before generating the canvas
-                    setTimeout(() => {
-                        html2canvas(node, {
-                            scale: 2, // High resolution
-                            useCORS: true,
-                            backgroundColor: '#000000',
-                            allowTaint: true
-                        }).then(canvas => {
-                            // Restore the download button
-                            if (actions) actions.style.display = 'flex';
-                            
-                            // Download the image
-                            const link = document.createElement('a');
-                            const sanitizedName = studentName.replace(/\\s+/g, '_').toUpperCase();
-                            link.download = sanitizedName + '_GOATS_CHAMPION.png';
-                            link.href = canvas.toDataURL('image/png');
-                            link.click();
-                        }).catch(err => {
-                            if (actions) actions.style.display = 'flex';
-                            console.error("Download Error: ", err);
-                        });
-                    }, 100);
-                }
-            <\/script>
-        </body></html>`;
+        html += `</body></html>`;
         pw.document.open();
         pw.document.write(html);
         pw.document.close();
