@@ -720,10 +720,10 @@
         <html>
         <head>
             <title>G.O.A.T.S Premium Certificates</title>
-            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
             <style>
                 * { box-sizing: border-box; margin: 0; padding: 0; }
-                body { background: #222; }
+                body { background: #555; }
                 @page { size: A5 portrait; margin: 0; }
                 .cert-page {
                     width: 148mm; height: 210mm;
@@ -734,103 +734,82 @@
                     overflow: hidden;
                     font-family: 'Montserrat', sans-serif;
                     color: #fff;
-                    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
                 }
                 .cert-page::before {
                     content: '';
                     position: absolute; top:0; left:0; right:0; bottom:0;
-                    background: radial-gradient(ellipse at center, rgba(30,20,0,1) 0%, rgba(5,5,5,1) 100%);
+                    background: radial-gradient(circle at center, rgba(30,20,0,1) 0%, rgba(5,5,5,1) 100%);
                     z-index: 1;
                 }
                 .sparkles {
                     position: absolute; top:0; left:0; right:0; bottom:0; z-index: 2;
                     background-image: 
-                        radial-gradient(circle at 10% 20%, rgba(255,215,0,0.15) 0%, transparent 10%),
-                        radial-gradient(circle at 90% 15%, rgba(255,215,0,0.2) 0%, transparent 12%),
-                        radial-gradient(circle at 15% 85%, rgba(255,200,0,0.15) 0%, transparent 10%),
-                        radial-gradient(circle at 85% 90%, rgba(255,220,0,0.15) 0%, transparent 15%),
-                        radial-gradient(circle at 50% 50%, rgba(212,175,55,0.25) 0%, transparent 50%);
+                        radial-gradient(circle at 20% 30%, rgba(255,215,0,0.1) 0%, transparent 6%),
+                        radial-gradient(circle at 80% 20%, rgba(255,215,0,0.15) 0%, transparent 8%),
+                        radial-gradient(circle at 10% 70%, rgba(255,200,0,0.1) 0%, transparent 6%),
+                        radial-gradient(circle at 90% 80%, rgba(255,220,0,0.12) 0%, transparent 7%),
+                        radial-gradient(circle at 50% 50%, rgba(255,215,0,0.2) 0%, transparent 40%);
                     background-size: 100% 100%;
+                    opacity: 0.9;
                 }
-                .gold-border {
-                    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
-                    border: 2px solid transparent;
-                    border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
-                    z-index: 3;
-                }
-                .gold-border::before {
-                    content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
-                    border: 1px solid rgba(212,175,55,0.4);
-                }
-                .content { position: relative; z-index: 5; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 35px 30px; }
+                .content { position: relative; z-index: 5; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }
                 
-                .header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-                .logo-wrap { display: flex; align-items: center; gap: 10px; text-align: left; flex: 1.2; }
-                .logo-wrap img { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
-                .logo-text { font-size: 8px; font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: 0.5px; }
-                .logo-text span { color: #d4af37; font-size: 5px; letter-spacing: 1px; text-transform: uppercase; }
+                .header { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; text-align: center; }
                 
-                .title-wrap { flex: 1; text-align: center; }
-                .title-1 { font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; font-weight: 700; color: #fff; line-height: 1.2; }
-                .title-2 { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 900; background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
-                
-                .founder-wrap { flex: 1.2; text-align: right; }
-                .founder-wrap img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #d4af37; object-fit: cover; box-shadow: 0 0 15px rgba(212,175,55,0.4); }
+                .title-wrap { text-align: center; width: 100%; }
+                .title-1 { font-family: 'Montserrat', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: 4px; color: #fff; line-height: 1.2; margin-bottom: 8px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
+                .title-2 { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 900; color: #d4af37; letter-spacing: 3px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
                 
                 .photo-circle {
-                    width: 250px; height: 250px; border-radius: 50%;
-                    border: 6px solid transparent;
-                    background: linear-gradient(#000, #000) padding-box, linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) border-box;
-                    box-shadow: 0 0 40px rgba(212,175,55,0.6), inset 0 0 30px rgba(0,0,0,0.8);
+                    width: 260px; height: 260px; border-radius: 50%;
+                    border: 8px solid #d4af37;
+                    box-shadow: 0 0 50px rgba(212,175,55,0.7), inset 0 0 30px rgba(0,0,0,0.8);
                     overflow: hidden; position: relative;
-                    margin-top: 10px; flex-shrink: 0;
+                    margin-top: 10px;
+                    background: #111;
                 }
                 .photo-circle img { width: 100%; height: 100%; object-fit: cover; }
                 
                 .ribbon {
                     position: relative;
-                    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+                    background: linear-gradient(135deg, #ffd700, #b8860b, #ffd700);
                     color: #000;
                     padding: 15px 50px;
                     font-family: 'Cinzel', serif;
                     font-weight: 900;
-                    font-size: 32px;
+                    font-size: 34px;
                     letter-spacing: 3px;
-                    margin-top: 45px;
-                    box-shadow: 0 15px 30px rgba(0,0,0,0.8), inset 0 2px 10px rgba(255,255,255,0.5);
+                    margin-top: 50px;
+                    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
                     text-align: center;
                     white-space: nowrap;
-                    border: 1px solid rgba(255,255,255,0.3);
                 }
                 .ribbon::before, .ribbon::after {
-                    content: ''; position: absolute; bottom: -15px; border: 20px solid transparent; 
+                    content: ''; position: absolute; bottom: -16px; border: 24px solid transparent; 
                 }
-                .ribbon::before { left: -25px; border-right-color: #8b6508; border-bottom-color: transparent; border-left-color: transparent; border-top-color: #8b6508; z-index: -1; }
-                .ribbon::after { right: -25px; border-left-color: #8b6508; border-bottom-color: transparent; border-right-color: transparent; border-top-color: #8b6508; z-index: -1; }
+                .ribbon::before { left: -30px; border-right-color: #8b6508; border-bottom-color: transparent; border-left-color: transparent; border-top-color: #8b6508; z-index: -1; }
+                .ribbon::after { right: -30px; border-left-color: #8b6508; border-bottom-color: transparent; border-right-color: transparent; border-top-color: #8b6508; z-index: -1; }
                 
                 .badge {
-                    position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
-                    background: #000; border: 2px solid #d4af37; border-radius: 20px;
-                    padding: 6px 20px; font-size: 11px; color: #ffd700; letter-spacing: 3px; font-weight: 900;
-                    box-shadow: 0 0 15px rgba(212,175,55,0.4); font-family: 'Montserrat', sans-serif;
+                    position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+                    background: #050508; border: 3px solid #d4af37; border-radius: 25px;
+                    padding: 6px 24px; font-size: 11px; color: #ffd700; letter-spacing: 3px; font-weight: 900;
+                    box-shadow: 0 8px 15px rgba(0,0,0,0.7); font-family: 'Montserrat', sans-serif;
                 }
 
                 .description {
-                    margin-top: auto;
-                    margin-bottom: 20px;
+                    margin-top: 60px;
                     text-align: center;
-                    font-size: 12px;
-                    color: #e0e0e0;
-                    line-height: 1.9;
-                    padding: 0 25px;
-                    text-shadow: 0 2px 5px rgba(0,0,0,1);
+                    font-size: 15px;
+                    color: #ddd;
+                    line-height: 1.8;
+                    padding: 0 30px;
                 }
-                .description span { color: #d4af37; font-weight: 900; font-size: 13.5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+                .description span { color: #d4af37; font-weight: 900; font-size: 18px; }
                 
                 @media print { body { background: #fff; } .cert-page { box-shadow: none; } .print-btn { display: none; } }
                 
-                .print-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: linear-gradient(135deg, #d4af37, #ffd700); color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: 900; font-family: 'Montserrat', sans-serif; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 16px; transition: transform 0.2s; }
-                .print-btn:hover { transform: scale(1.05); }
+                .print-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: linear-gradient(to right, #d4af37, #ffd700); color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: 900; font-family: 'Montserrat', sans-serif; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 16px; }
             </style>
         </head>
         <body>
@@ -849,20 +828,12 @@
             
             html += `
             <div class="cert-page">
-                <div class="gold-border"></div>
                 <div class="sparkles"></div>
                 <div class="content">
                     <div class="header">
-                        <div class="logo-wrap">
-                            ${logoUrl ? `<img src="${logoUrl}" />` : ''}
-                            <div class="logo-text">DON BOSCO<br>POLYTECHNIC COLLEGE<br><span>GIVERS OF ALL TALENTS STUDENTS</span></div>
-                        </div>
                         <div class="title-wrap">
                             <div class="title-1">BEST G.O.A.T.</div>
                             <div class="title-2">${title2}</div>
-                        </div>
-                        <div class="founder-wrap">
-                            ${founderUrl ? `<img src="${founderUrl}" />` : ''}
                         </div>
                     </div>
                     
@@ -878,7 +849,6 @@
                     </div>
                     
                     <div class="description">${desc}</div>
-                    
                 </div>
             </div>`;
         });
