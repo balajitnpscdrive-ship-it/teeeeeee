@@ -721,6 +721,7 @@
         <head>
             <title>G.O.A.T.S Premium Certificates</title>
             <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
             <style>
                 * { box-sizing: border-box; margin: 0; padding: 0; }
                 body { background: #222; }
@@ -728,7 +729,7 @@
                 .cert-page {
                     width: 148mm; height: 210mm;
                     background: #000;
-                    margin: 0 auto;
+                    margin: 0 auto 40px auto;
                     position: relative;
                     page-break-after: always;
                     overflow: hidden;
@@ -827,7 +828,11 @@
                 }
                 .description span { color: #d4af37; font-weight: 900; font-size: 13.5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
                 
-                @media print { body { background: #fff; } .cert-page { box-shadow: none; } .print-btn { display: none; } }
+                .download-actions { position: absolute; top: 25px; left: 25px; z-index: 1000; display:flex; gap:10px; }
+                .download-btn { background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #d4af37; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 10px; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.8); backdrop-filter: blur(5px); letter-spacing: 1px; }
+                .download-btn:hover { background: #d4af37; color: #000; transform: scale(1.05); box-shadow: 0 0 15px rgba(212,175,55,0.6); }
+
+                @media print { body { background: #fff; } .cert-page { box-shadow: none; margin-bottom: 0px; } .print-btn, .download-actions { display: none !important; } }
                 
                 .print-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: linear-gradient(135deg, #d4af37, #ffd700); color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: 900; font-family: 'Montserrat', sans-serif; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 16px; transition: transform 0.2s; }
                 .print-btn:hover { transform: scale(1.05); }
@@ -837,7 +842,7 @@
             <button class="print-btn" onclick="window.print()">🖨️ PRINT CERTIFICATES (A5)</button>
         `;
 
-        certStudents.forEach(st => {
+        certStudents.forEach((st, idx) => {
             let title2 = currentCertType === 'weekly' ? 'OF THE WEEK' : 'OF THE YEAR';
             let badgeTxt = currentCertType === 'weekly' ? 'WEEKLY CHAMPION' : 'ANNUAL CHAMPION';
             let defaultPhoto = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23333\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';
@@ -848,7 +853,10 @@
             Your monumental contribution to the <span>DEPARTMENT OF ${st.dept.toUpperCase()}</span> securing a massive <span>${st.pts} POINTS</span> validates you as a true asset to this institution.`;
             
             html += `
-            <div class="cert-page">
+            <div class="cert-page" id="cert-${idx}">
+                <div class="download-actions">
+                    <button class="download-btn" onclick="downloadImage('cert-${idx}', '${st.name}')">📸 DOWNLOAD FOR SOCIAL MEDIA</button>
+                </div>
                 <div class="gold-border"></div>
                 <div class="sparkles"></div>
                 <div class="content">
@@ -883,7 +891,40 @@
             </div>`;
         });
 
-        html += `</body></html>`;
+        html += `
+            <script>
+                function downloadImage(id, studentName) {
+                    const node = document.getElementById(id);
+                    const actions = node.querySelector('.download-actions');
+                    
+                    // Temporarily hide the download button to prevent it from showing up in the downloaded image
+                    if (actions) actions.style.display = 'none';
+                    
+                    // Ensure the DOM updates the display:none before generating the canvas
+                    setTimeout(() => {
+                        html2canvas(node, {
+                            scale: 2, // High resolution
+                            useCORS: true,
+                            backgroundColor: '#000000',
+                            allowTaint: true
+                        }).then(canvas => {
+                            // Restore the download button
+                            if (actions) actions.style.display = 'flex';
+                            
+                            // Download the image
+                            const link = document.createElement('a');
+                            const sanitizedName = studentName.replace(/\\s+/g, '_').toUpperCase();
+                            link.download = sanitizedName + '_GOATS_CHAMPION.png';
+                            link.href = canvas.toDataURL('image/png');
+                            link.click();
+                        }).catch(err => {
+                            if (actions) actions.style.display = 'flex';
+                            console.error("Download Error: ", err);
+                        });
+                    }, 100);
+                }
+            </script>
+        </body></html>`;
         pw.document.open();
         pw.document.write(html);
         pw.document.close();
