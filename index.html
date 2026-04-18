@@ -1,8 +1,3 @@
-
-index.html
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1133,6 +1128,7 @@ index.html
         pw.document.close(); showToast("✅ Report generated!");
       } catch (e) { if (pw && !pw.closed) { pw.document.body.innerHTML = `<h3 style="color:red;font-family:sans-serif;">❌ Error generating report.</h3>`; } showToast("❌ Error: " + e.message); }
     }
+    boot();
   </script>
 </body>
 </html>
