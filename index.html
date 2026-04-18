@@ -303,7 +303,29 @@
         <button class="btn-main" onclick="generateEventCert()" style="margin-top:40px; background:linear-gradient(to right, #00d4ff, #00ff88); color:#000; font-size:18px; height:60px; font-weight:900;">🖨️ GENERATE A4 PROFESSIONAL CERTIFICATE</button>
       </div>
     </div>
+  <!-- STUDENT PERFORMANCE STATEMENT MODAL -->
+  <div id="stu-stmt-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#050508; z-index:5000; overflow-y:auto; padding-bottom:50px;">
+    <div class="lb-header">
+      <button class="lb-back" onclick="closeStuStmtModal()">← BACK</button>
+      <h2 style="font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:2px; flex:1;">STUDENT PERFORMANCE STATEMENT</h2>
+    </div>
+    <div style="padding:20px; max-width:600px; margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:16px; border:1px solid rgba(255,255,255,0.1); text-align:center;">
+        <p style="font-size:10px; color:#aaa; margin-bottom:15px; letter-spacing:2px; font-weight:900;">SCAN STUDENT QR OR SEARCH NAME</p>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+           <div style="flex:1; position:relative;">
+             <input type="text" id="stmt-search" placeholder="Type Student Name..." style="margin:0; width:100%;">
+             <div id="stmt-autocomplete" style="position:absolute; top:100%; left:0; right:0; background:#1a1a1a; border:1px solid var(--neon); border-radius:8px; max-height:150px; overflow-y:auto; display:none; text-align:left; z-index:100;"></div>
+           </div>
+           <button onclick="toggleStmtCam()" id="stmt-cam-btn" style="background:var(--neon); border:none; border-radius:12px; width:50px; cursor:pointer; font-size:20px;">📷</button>
+        </div>
+        <div id="stmt-reader" style="display:none; margin-bottom:15px; border-radius:12px; overflow:hidden; border:2px solid var(--neon);"></div>
+        <button class="btn-main" onclick="fetchStudentStatement()" style="background:var(--accent); color:#000;">🔍 GENERATE PERFORMANCE STATEMENT</button>
+      </div>
+      <div id="stmt-results" style="display:none; margin-top:25px;"></div>
+    </div>
   </div>
+  
   <!-- DEPARTMENT GRID -->
   <div id="dept-gate" style="display:block;">
     <p class="gate-title">SELECT DEPARTMENT</p>
@@ -383,8 +405,12 @@
             <button class="btn-admin" style="flex:1; background:rgba(255,215,0,0.1); color:#ffd700; border:2px solid #ffd700;" onclick="openCertDashboard('annually')">🏆 ANNUAL CERTIFICATES (TOP 5)</button>
         </div>
         <div style="display:flex; gap:10px; margin-bottom:10px;">
-          <button class="btn-admin" style="flex:1; color:var(--neon);border:1px solid var(--neon);font-size:12px;padding:12px;" onclick="generateReport('annually')">📊 ANNUAL REPORT</button>
-          <button class="btn-admin" style="flex:1; color:#00d4ff;border:1px solid #00d4ff;font-size:12px;padding:12px;" onclick="generateReport('weekly')">📅 WEEKLY REPORT</button>
+          <button class="btn-admin" style="flex:1; color:var(--neon);border:1px solid var(--neon);font-size:11px;padding:12px;" onclick="generateReport('annually')">📊 ANNUAL REPORT</button>
+          <button class="btn-admin" style="flex:1; color:#00d4ff;border:1px solid #00d4ff;font-size:11px;padding:12px;" onclick="generateReport('weekly')">📅 WEEKLY REPORT</button>
+        </div>
+        <div style="display:flex; gap:10px; margin-bottom:10px;">
+          <button class="btn-admin" style="flex:1; background:rgba(0,255,136,0.1); color:#00ff88; border:1px solid #00ff88; font-size:11px; padding:12px;" onclick="downloadDatabaseCSV()">📄 DOWNLOAD DATABASE (CSV)</button>
+          <button class="btn-admin" style="flex:1; background:rgba(0,212,255,0.1); color:#00d4ff; border:1px solid #00d4ff; font-size:11px; padding:12px;" onclick="openStuStmtModal()">💳 STUDENT PERFORMANCE STATEMENT</button>
         </div>
         <button class="btn-admin" style="color:var(--accent);border:1px solid var(--accent);" onclick="toggleWebAppForm()">🔗 NEW WEB APP CONNECTION</button>
         <button class="btn-admin" style="color:#00ff88;border:1px solid #00ff88;" onclick="toggleBranding()">🎨 BRANDING DASHBOARD</button>
@@ -419,7 +445,7 @@
     /* ============================================================
        CONFIG
     ============================================================ */
-    const API = "https://script.google.com/macros/s/AKfycbzSuGkcUygbbHwCqAs6UnELsYG0yvzPAVgqOkI_euei2hHnwREAGHm1QcBiaeh1Re8jBg/exec";
+    const API = "https://script.google.com/macros/s/AKfycbziqzqE3VYWXOSJi4nAXI-MV4F_CSct6H0PlFkDpj5mFlCHb9lMWG3sWqef-p_d4yS9QQ/exec";
     
     /* ============================================================
        GLOBAL STATE
@@ -1126,6 +1152,82 @@
         pw.document.write(`<!DOCTYPE html><html><head><title>G.O.A.T.S Report</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:sans-serif;background:#fff;color:#111;padding:0;}.page{width:210mm;min-height:297mm;margin:0 auto;padding:15mm 15mm;page-break-after:always;position:relative;background:white;}.page:last-child{page-break-after:auto;}.print-btn{position:fixed;top:16px;right:16px;z-index:999;padding:14px 32px;background:#111;color:#fbff00;border:none;border-radius:10px;font-weight:900;font-size:14px;cursor:pointer;letter-spacing:1px;}.report-header{text-align:center;margin-bottom:20px;padding-bottom:12px;border-bottom:3px double #333;}.college-logo{width:60px;height:60px;object-fit:contain;margin-bottom:4px;}.college-logo-sm{width:50px;height:50px;object-fit:contain;margin-bottom:4px;}.college-name{font-size:20px;font-weight:900;letter-spacing:2px;text-transform:uppercase;}.college-sub{font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin:2px 0;}.report-title{font-size:15px;font-weight:900;color:#b8860b;letter-spacing:2px;margin-top:6px;}.dept-title{font-size:15px;font-weight:900;color:#333;letter-spacing:2px;margin-top:6px;border:2px solid #333;display:inline-block;padding:4px 16px;border-radius:6px;}.report-date{font-size:10px;color:#999;margin-top:4px;}.section-title{font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#333;margin:16px 0 8px;padding:4px 10px;background:#f5f5f5;border-left:4px solid #d4af37;border-radius:4px;page-break-after:avoid;}.standings{width:100%;border-collapse:collapse;margin-bottom:16px;}.standings th{background:#111;color:#fbff00;padding:8px 12px;text-align:left;font-size:10px;letter-spacing:2px;}.standings td{padding:10px 12px;border-bottom:1px solid #eee;font-size:13px;}.standings .rank-cell{width:160px;}.standings .pts-cell{font-weight:900;font-size:16px;text-align:right;}.house-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle;}.cat-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:10px;}.cat-table th{background:#222;color:#fff;padding:6px 8px;text-align:left;font-size:9px;letter-spacing:1px;}.cat-table td{padding:6px 8px;border-bottom:1px solid #eee;}.cat-table .cat-name{font-weight:900;text-transform:uppercase;letter-spacing:1px;background:#fafafa;}.cat-table b{color:#333;}.toppers{width:100%;border-collapse:collapse;margin-bottom:12px;}.toppers th{background:#1a5e1a;color:white;padding:6px 10px;text-align:left;font-size:9px;letter-spacing:1px;}.toppers td{padding:6px 10px;border-bottom:1px solid #eee;font-size:11px;}.toppers .pts-cell{font-weight:900;text-align:right;}table,tr,td,th{page-break-inside:avoid;}.signature-area{margin-top:30px;padding-top:10px;page-break-inside:avoid;}.sig-line{width:200px;border-bottom:1px solid #333;margin:0 auto 6px;}.sig-label{font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-align:center;}.sig-sub{font-size:9px;color:#888;text-align:center;}@media print{.print-btn{display:none !important;}@page{size:A4 portrait;margin:10mm;}body{padding:0;background:#fff;}.page{padding:0mm;margin:0;width:100%;min-height:auto;box-shadow:none;page-break-after:always;}.signature-area{page-break-inside:avoid;}table{page-break-inside:auto;}tr{page-break-inside:avoid;page-break-after:auto;}}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ PRINT REPORT</button>${page1}${deptPages}</body></html>`);
         pw.document.close(); showToast("✅ Report generated!");
       } catch (e) { if (pw && !pw.closed) { pw.document.body.innerHTML = `<h3 style="color:red;font-family:sans-serif;">❌ Error generating report.</h3>`; } showToast("❌ Error: " + e.message); }
+    }
+    async function downloadDatabaseCSV() {
+      showToast("📥 Preparing database CSV...");
+      try {
+        const res = await api({ action: "getAdminData" });
+        if (!res.success || !res.logs) { showToast("❌ Download failed."); return; }
+        let csvContent = "data:text/csv;charset=utf-8,";
+        res.logs.forEach(row => {
+          const rowData = row.map(cell => {
+            let val = String(cell || '').replace(/"/g, '""');
+            if (val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
+            return val;
+          });
+          csvContent += rowData.join(",") + "\r\n";
+        });
+        const encodedUri = encodeURI(csvContent); const link = document.createElement("a");
+        link.setAttribute("href", encodedUri); link.setAttribute("download", `GOATS_Points_DB_${new Date().toISOString().slice(0,10)}.csv`);
+        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        showToast("✅ Database downloaded!");
+      } catch (e) { showToast("❌ Error: " + e.message); }
+    }
+    let stmtHtml5QrCode = null;
+    function openStuStmtModal() {
+      document.getElementById('stu-stmt-modal').style.display = 'block';
+      document.getElementById('stmt-results').style.display = 'none'; document.getElementById('stmt-search').value = '';
+      const inp = document.getElementById('stmt-search'), ac = document.getElementById('stmt-autocomplete');
+      api({ action: "getStudentList" }).then(res => {
+        if(!res.success) return;
+        inp.oninput = (e) => {
+          const val = e.target.value.toLowerCase().trim(); ac.innerHTML = '';
+          if (val.length >= 2) {
+            const matches = res.students.filter(s => s.name.toLowerCase().includes(val));
+            if (matches.length > 0) {
+              ac.style.display = 'block';
+              matches.slice(0, 10).forEach(s => {
+                const div = document.createElement('div');
+                div.style.padding = '12px'; div.style.cursor = 'pointer'; div.style.borderBottom = '1px solid rgba(255,255,255,0.05)'; div.style.color = '#fff';
+                div.innerHTML = `<b>${s.name}</b> <small style="color:#888;">(${s.dept})</small>`;
+                div.onclick = () => { inp.value = s.name; ac.style.display = 'none'; fetchStudentStatement(); };
+                ac.appendChild(div);
+              });
+            } else ac.style.display = 'none';
+          } else ac.style.display = 'none';
+        };
+      });
+    }
+    function closeStuStmtModal() { if (stmtHtml5QrCode) stopStmtCam(); document.getElementById('stu-stmt-modal').style.display = 'none'; }
+    async function toggleStmtCam() {
+      if (!stmtHtml5QrCode) {
+        document.getElementById('stmt-reader').style.display = 'block';
+        stmtHtml5QrCode = new Html5Qrcode("stmt-reader");
+        await stmtHtml5QrCode.start({ facingMode: "environment" }, { fps: 15, qrbox: 240 }, (t) => {
+          const p = t.split('|').map(x => x.trim());
+          if (p.length >= 1) { document.getElementById('stmt-search').value = p[0]; stopStmtCam(); fetchStudentStatement(); }
+        });
+      } else { stopStmtCam(); }
+    }
+    async function stopStmtCam() { if (stmtHtml5QrCode) { await stmtHtml5QrCode.stop(); stmtHtml5QrCode = null; } document.getElementById('stmt-reader').style.display = 'none'; }
+    async function fetchStudentStatement() {
+      const name = document.getElementById('stmt-search').value.trim(); if (!name) { showToast("⚠️ Enter name!"); return; }
+      showToast("⏳ Loading statement...");
+      try {
+        const res = await api({ action: "getStudentStatement", studentName: name });
+        if (!res.success) { showToast("❌ Failed!"); return; }
+        const { totalPoints, categoryBreakdown, logs, studentProfile } = res;
+        const resDiv = document.getElementById('stmt-results'); resDiv.style.display = 'block';
+        let catHtml = ''; for (const cat in categoryBreakdown) { catHtml += `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);"><span style="color:#aaa;">${cat}</span><span style="font-weight:900;color:var(--neon);">${categoryBreakdown[cat]} PTS</span></div>`; }
+        resDiv.innerHTML = `<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(251,255,0,0.2);border-radius:16px;padding:25px;margin-bottom:20px;text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:white;line-height:1;">${studentProfile.name}</div><div style="font-size:12px;color:var(--accent);font-weight:900;letter-spacing:2px;margin:8px 0;">${studentProfile.dept.toUpperCase()} | ${studentProfile.house.toUpperCase()} HOUSE</div><div style="font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--neon);margin:15px 0;">${totalPoints}</div><div style="font-size:10px;color:#666;letter-spacing:3px;">TOTAL POINTS EARNED</div></div><div style="background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;margin-bottom:20px;"><div style="font-size:10px;font-weight:900;color:#888;letter-spacing:2px;margin-bottom:15px;">CATEGORY BREAKDOWN</div>${catHtml || '<div style="color:#555;font-style:italic;">No points yet.</div>'}</div><div style="background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;"><div style="font-size:10px;font-weight:900;color:#888;letter-spacing:2px;margin-bottom:15px;">RECENT ACTIVITY</div><div style="max-height:300px;overflow-y:auto;">${logs.map(l => `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;font-weight:900;color:#fff;">${l.cat}</span><span style="font-size:14px;font-weight:900;color:${l.pts > 0 ? 'var(--neon)' : 'var(--red)'}">${l.pts > 0 ? '+' : ''}${l.pts}</span></div><div style="font-size:10px;color:#666;margin-top:4px;">${new Date(l.date).toLocaleDateString()} • By ${l.teacher}</div>${l.remarks ? `<div style="font-size:10px;color:#888;font-style:italic;margin-top:4px;">"${l.remarks}"</div>` : ''}</div>`).join('')}</div></div><button onclick="printStudentStatement('${name}')" class="btn-main" style="margin-top:20px;background:#fff;color:#000;font-size:16px;">🖨️ PRINT A4 PERFORMANCE STATEMENT</button>`;
+      } catch (e) { showToast("❌ Error: " + e.message); }
+    }
+    async function printStudentStatement(name) {
+      const resp = await api({ action: "getStudentStatement", studentName: name }); if (!resp.success) return;
+      const { totalPoints, categoryBreakdown, logs, studentProfile } = resp; const pw = window.open('', '_blank');
+      const cache = JSON.parse(localStorage.getItem('goats_cache') || '{}'); const logoUrl = cache.images?.logo || '';
+      const html = `<!DOCTYPE html><html><head><title>Statement - ${name}</title><style>body{font-family:sans-serif;padding:40px;color:#111;}.page{width:210mm;margin:0 auto;}.header{text-align:center;border-bottom:3px double #333;padding-bottom:20px;margin-bottom:30px;}.college-name{font-size:24px;font-weight:900;text-transform:uppercase;}.college-sub{font-size:12px;color:#666;letter-spacing:2px;margin-top:4px;}.report-title{font-size:18px;font-weight:900;border:2px solid #111;display:inline-block;padding:8px 25px;margin-top:20px;border-radius:10px;}.student-box{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;border-bottom:1px solid #ddd;padding-bottom:20px;}.name-big{font-size:32px;font-weight:900;text-transform:uppercase;}.score-big{font-size:60px;font-weight:900;color:#111;line-height:1;}.section-title{font-size:14px;font-weight:900;background:#f0f0f0;padding:10px;margin:30px 0 15px;border-left:5px solid #000;}table{width:100%;border-collapse:collapse;}th{text-align:left;background:#111;color:#fff;padding:10px;font-size:12px;}td{padding:12px 10px;border-bottom:1px solid #eee;font-size:13px;}.pts-cell{font-weight:900;text-align:right;}@media print{.no-print{display:none;}@page{size:A4;margin:15mm;}}.print-btn{position:fixed;top:20px;right:20px;padding:15px 30px;background:#000;color:#fff;border:none;border-radius:30px;font-weight:900;cursor:pointer;}</style></head><body><button class="print-btn no-print" onclick="window.print()">🖨️ PRINT STATEMENT</button><div class="page"><div class="header">${logoUrl?`<img src="${logoUrl}" style="height:80px;margin-bottom:10px;">`:''}<div class="college-name">DON BOSCO POLYTECHNIC COLLEGE</div><div class="college-sub">Givers Of All Talents Students — Championship Portal</div><div class="report-title">STUDENT PERFORMANCE STATEMENT</div></div><div class="student-box"><div><div style="font-size:12px;color:#666;letter-spacing:2px;font-weight:900;">STUDENT PROFILE</div><div class="name-big">${studentProfile.name}</div><div style="font-size:14px;font-weight:700;margin-top:5px;">DEPT: ${studentProfile.dept} | HOUSE: ${studentProfile.house}</div></div><div style="text-align:right;"><div style="font-size:12px;color:#666;letter-spacing:2px;font-weight:900;">TOTAL POINTS</div><div class="score-big">${totalPoints}</div></div></div><div class="section-title">📊 CATEGORY BREAKDOWN</div><table><tr><th>CATEGORY</th><th>POINTS</th></tr>${Object.entries(categoryBreakdown).map(([cat,pts])=>`<tr><td>${cat}</td><td class="pts-cell">${pts} PTS</td></tr>`).join('')}</table><div class="section-title">📜 COMPLETE ACTIVITY LOG</div><table><tr><th>DATE</th><th>CATEGORY</th><th>TEACHER</th><th>REMARKS</th><th>POINTS</th></tr>${logs.map(l=>`<tr><td>${new Date(l.date).toLocaleDateString()}</td><td><b>${l.cat}</b></td><td>${l.teacher}</td><td style="font-size:11px;color:#666;font-style:italic;">${l.remarks||'—'}</td><td class="pts-cell" style="color:${l.pts>0?'#111':'#ff416c'}">${l.pts>0?'+':''}${l.pts}</td></tr>`).join('')}</table><div style="margin-top:80px;display:flex;justify-content:space-between;padding:0 20px;"><div style="text-align:center;"><div style="width:200px;border-top:1px solid #111;margin-bottom:5px;"></div><div style="font-weight:900;font-size:12px;">HEAD OF DEPARTMENT</div><div style="font-size:10px;color:#666;">${studentProfile.dept}</div></div><div style="text-align:center;"><div style="width:200px;border-top:1px solid #111;margin-bottom:5px;"></div><div style="font-weight:900;font-size:12px;">PRINCIPAL</div><div style="font-size:10px;color:#666;">Don Bosco Polytechnic College</div></div></div></div></body></html>`;
+      pw.document.open(); pw.document.write(html); pw.document.close();
     }
   </script>
 </body>
