@@ -340,7 +340,7 @@
     /* ============================================================
        CONFIG
     ============================================================ */
-    const API = "https://script.google.com/macros/s/AKfycbztbFYAolIIJMRHl1Ze8cbOEOix0MUvkR72uq5a0kyOcMDHRmhf0yWMZOHZvnWHf0jFHA/exec";
+    const API = "https://script.google.com/macros/s/AKfycbxtkY3V7UTwKjLUGqw81Oqvi_DKeelRdTqW1RNwaREUQSMAWh4JWdljK6MiqQaqu4Xvbg/exec";
     
     /* ============================================================
        GLOBAL STATE
@@ -424,8 +424,18 @@
       api({ action: "getStudentList" }).then(res => {
         if (res && res.success) {
           const inp = document.getElementById('man-name'), ac = document.getElementById('student-autocomplete'), hs = document.getElementById('man-house');
+          const setHouse = (houseName) => {
+            if (!houseName) return;
+            const h = houseName.trim().toLowerCase();
+            for (let i = 0; i < hs.options.length; i++) {
+              if (hs.options[i].value.trim().toLowerCase() === h) { hs.selectedIndex = i; return; }
+            }
+          };
           inp.addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase(); ac.innerHTML = '';
+            const val = e.target.value.toLowerCase().trim(); ac.innerHTML = '';
+            // Auto-select if full name matches exactly
+            const exactMatch = res.students.find(s => s.name.toLowerCase().trim() === val);
+            if (exactMatch) setHouse(exactMatch.house);
             if (val.length >= 3) {
               const deptFilter = currentDept === 'Admin' ? null : currentDept;
               const matches = res.students.filter(s => s.name.toLowerCase().includes(val) && (!deptFilter || !s.dept || s.dept.toLowerCase() === deptFilter.toLowerCase()));
@@ -435,7 +445,7 @@
                   const div = document.createElement('div');
                   div.style.padding = '10px 14px'; div.style.cursor = 'pointer'; div.style.borderBottom = '1px solid rgba(255,255,255,0.05)'; div.style.color = '#fff'; div.style.fontSize = '14px';
                   div.innerHTML = `<span style="font-weight:900;">${s.name}</span> <span style="color:#aaa;font-size:10px;margin-left:6px;">(${s.house})</span>`;
-                  div.onclick = () => { inp.value = s.name; for (let i = 0; i < hs.options.length; i++) { if (hs.options[i].value === s.house) hs.selectedIndex = i; } ac.style.display = 'none'; };
+                  div.onclick = () => { inp.value = s.name; setHouse(s.house); ac.style.display = 'none'; };
                   ac.appendChild(div);
                 });
               } else { ac.style.display = 'none'; }
