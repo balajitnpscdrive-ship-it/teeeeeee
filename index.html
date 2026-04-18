@@ -222,8 +222,86 @@
       <h2 id="cert-title" style="font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:2px; flex:1;">CERTIFICATES</h2>
     </div>
     <div style="padding:20px; max-width:800px; margin:0 auto;">
-      <button class="btn-main" onclick="generateCertificates()" style="background:linear-gradient(to right, #d4af37, #ffd700); color:#000; margin-bottom:20px; font-size:16px;">🖨️ GENERATE A5 CERTIFICATES</button>
+      <div style="background:rgba(255,255,255,0.05); padding:16px; border-radius:12px; margin-bottom:20px; border:1px solid rgba(255,255,255,0.1);">
+        <label style="display:block; font-size:10px; color:var(--neon); font-weight:900; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">🎨 CERTIFICATE SETTINGS</label>
+        <div style="display:flex; gap:10px; margin-bottom:10px;">
+          <input type="text" id="cert-event-name" placeholder="Event Name (e.g. Sports Day 2026)" style="margin:0; flex:2;">
+          <select id="cert-size-select" style="margin:0; flex:1;">
+            <option value="A5">📏 A5 (Small)</option>
+            <option value="A4">📐 A4 (Standard)</option>
+          </select>
+        </div>
+        <button class="btn-main" onclick="generateCertificates()" style="background:linear-gradient(to right, #d4af37, #ffd700); color:#000; font-size:16px;">🖨️ PREVIEW & PRINT CERTIFICATES</button>
+      </div>
       <div id="cert-list"></div>
+    </div>
+  </div>
+  <!-- EVENT CERTIFICATE GENERATOR MODAL -->
+  <div id="event-cert-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#050508; z-index:5000; overflow-y:auto; padding-bottom:50px;">
+    <div class="lb-header">
+      <button class="lb-back" onclick="closeEventCertModal()">← BACK</button>
+      <h2 style="font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:2px; flex:1;">EVENT CERTIFICATE DESIGNER</h2>
+    </div>
+    <div style="padding:24px; max-width:800px; margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.03); padding:24px; border-radius:16px; border:1px solid rgba(255,255,255,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+        
+        <label style="display:block; font-size:10px; color:var(--neon); font-weight:900; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">PROGRAM DETAILS</label>
+        <input type="text" id="ev-prog-title" placeholder="Program Title (e.g. ANNUAL SPORTS MEET 2026)" style="font-weight:900; color:var(--neon); width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff; margin-bottom:20px;">
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div>
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">CATEGORY</label>
+            <select id="ev-category" style="width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+                <option value="sports">🏅 SPORTS</option>
+                <option value="cultural">🎨 CULTURAL</option>
+                <option value="academic">📚 ACADEMIC</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">EVENT NAME</label>
+            <input type="text" id="ev-event-name" placeholder="e.g. 100M SPRINT" style="width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          </div>
+        </div>
+        <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">STUDENT IDENTIFICATION</label>
+        <div style="position:relative; margin-bottom:16px;">
+          <input type="text" id="ev-student-search" placeholder="Search Student Name..." autocomplete="off" style="width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+          <div id="ev-autocomplete" style="position:absolute; top:100%; left:0; right:0; background:#1a1a1a; border:1px solid var(--neon); border-radius:8px; max-height:200px; overflow-y:auto; z-index:1000; display:none; box-shadow:0 4px 20px #000; text-align:left;"></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div>
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">DEPARTMENT</label>
+            <input type="text" id="ev-student-dept" readonly style="width:100%; padding:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; color:#888;">
+          </div>
+          <div>
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">HOUSE (OPTIONAL)</label>
+            <select id="ev-student-house" style="width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;"></select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:16px; margin-bottom:20px;">
+          <div>
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">ACHIEVEMENT / RANK</label>
+            <select id="ev-rank" style="width:100%; padding:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:#fff;">
+                <option value="FIRST PLACE">🏆 FIRST PLACE</option>
+                <option value="SECOND PLACE">🥈 SECOND PLACE</option>
+                <option value="THIRD PLACE">🥉 THIRD PLACE</option>
+                <option value="SPECIAL RECOGNITION">🌟 SPECIAL RECOGNITION</option>
+                <option value="PARTICIPANT">🤝 PARTICIPANT</option>
+            </select>
+          </div>
+          <div style="text-align:center;">
+            <label style="display:block; font-size:10px; color:#aaa; font-weight:900; letter-spacing:1px; margin-bottom:8px;">STUDENT PHOTO</label>
+            <label style="display:inline-block; width:100%; padding:12px; background:rgba(255,255,255,0.05); border:2px dashed rgba(255,255,255,0.2); border-radius:12px; cursor:pointer; color:#aaa; font-weight:700; font-size:12px;">
+              📸 UPLOAD
+              <input type="file" id="ev-photo-input" style="display:none;" accept="image/*" onchange="previewEvPhoto(this)">
+            </label>
+          </div>
+        </div>
+        <div id="ev-photo-preview-wrap" style="display:none; text-align:center; margin-top:20px; padding:20px; background:rgba(0,0,0,0.3); border-radius:12px;">
+          <img id="ev-photo-preview" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--neon); box-shadow:0 0 20px rgba(251,255,0,0.3);">
+          <div style="font-size:10px; color:#666; margin-top:8px; letter-spacing:1px;">STUDENT PHOTO PREVIEW</div>
+        </div>
+        <button class="btn-main" onclick="generateEventCert()" style="margin-top:40px; background:linear-gradient(to right, #00d4ff, #00ff88); color:#000; font-size:18px; height:60px; font-weight:900;">🖨️ GENERATE A4 PROFESSIONAL CERTIFICATE</button>
+      </div>
     </div>
   </div>
   <!-- DEPARTMENT GRID -->
@@ -310,6 +388,7 @@
         </div>
         <button class="btn-admin" style="color:var(--accent);border:1px solid var(--accent);" onclick="toggleWebAppForm()">🔗 NEW WEB APP CONNECTION</button>
         <button class="btn-admin" style="color:#00ff88;border:1px solid #00ff88;" onclick="toggleBranding()">🎨 BRANDING DASHBOARD</button>
+        <button class="btn-admin" style="color:#fbff00;border:1px solid #fbff00;background:rgba(251,255,0,0.05);" onclick="openEventCertModal()">🎓 GENERATE EVENT CERTIFICATES</button>
         <button class="btn-admin" style="color:white;border:1px dashed rgba(255,255,255,0.4);" onclick="prepareBulkPrint()">🖨️ BULK QR SYSTEM (A4)</button>
         <button class="btn-admin" style="color:white;border:1px solid rgba(255,255,255,0.15);" onclick="forceSync()">🔄 SYNC DATA CACHE</button>
         
@@ -749,20 +828,26 @@
         }
     }
     async function generateCertificates() {
+        const size = document.getElementById('cert-size-select').value;
+        const customEvent = document.getElementById('cert-event-name').value.trim();
         const pw = window.open('', '_blank');
         if (!pw) { showToast("❌ Popup blocked!"); return; }
         
-        pw.document.write(`<html><body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h2>Generating Premium Certificates...</h2></body></html>`);
+        pw.document.write(`<html><body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h2>Generating Premium ${size} Certificates...</h2></body></html>`);
         
         const cache = JSON.parse(localStorage.getItem('goats_cache') || '{}');
         let logoUrl = cache.images && cache.images.logo ? cache.images.logo : '';
         let founderUrl = cache.images && cache.images.founder ? cache.images.founder : '';
+        let bgUrl = cache.images && cache.images.bg ? cache.images.bg : '';
         
         const hConfig = cache.houseConfig || [];
         const hColors = {};
         hConfig.forEach(h => hColors[(h.name || '').toUpperCase()] = h.color);
         
-        // Build Premium A5 Certificate Templates
+        const isA4 = (size === 'A4');
+        const W = isA4 ? '210mm' : '148mm';
+        const H = isA4 ? '297mm' : '210mm';
+        // Build Premium Certificate Templates
         let html = `<!DOCTYPE html>
         <html>
         <head>
@@ -771,9 +856,9 @@
             <style>
                 * { box-sizing: border-box; margin: 0; padding: 0; }
                 body { background: #555; }
-                @page { size: A5 portrait; margin: 0; }
+                @page { size: ${size} portrait; margin: 0; }
                 .cert-page {
-                    width: 148mm; height: 210mm;
+                    width: ${W}; height: ${H};
                     background: #000;
                     margin: 0 auto;
                     position: relative;
@@ -781,6 +866,12 @@
                     overflow: hidden;
                     font-family: 'Montserrat', sans-serif;
                     color: #fff;
+                }
+                .cert-bg-img {
+                    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                    background-size: cover; background-position: center;
+                    filter: brightness(0.3) blur(2px);
+                    z-index: 0;
                 }
                 .sparkles {
                     position: absolute; top:0; left:0; right:0; bottom:0; z-index: 2;
@@ -793,23 +884,23 @@
                     background-size: 100% 100%;
                     opacity: 0.9;
                 }
-                .content { position: relative; z-index: 5; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 25px 30px; }
+                .content { position: relative; z-index: 5; height: 100%; display: flex; flex-direction: column; align-items: center; padding: ${isA4 ? '40px 50px' : '25px 30px'}; }
                 
-                .header { width: 100%; position: relative; text-align: center; margin-bottom: 20px; padding: 0 65px; }
+                .header { width: 100%; position: relative; text-align: center; margin-bottom: ${isA4 ? '35px' : '20px'}; padding: 0 65px; }
                 .logo-wrap { position: absolute; top: 0; left: 0; }
-                .logo-wrap img { width: 55px; height: 55px; object-fit: contain; }
+                .logo-wrap img { width: ${isA4 ? '80px' : '55px'}; height: ${isA4 ? '80px' : '55px'}; object-fit: contain; }
                 
                 .founder-wrap { position: absolute; top: 0; right: 0; }
-                .founder-wrap img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid #d4af37; object-fit: cover; }
+                .founder-wrap img { width: ${isA4 ? '80px' : '55px'}; height: ${isA4 ? '80px' : '55px'}; border-radius: 50%; border: 2px solid #d4af37; object-fit: cover; }
                 
-                .college-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: 1px; }
-                .college-subtitle { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: #d4af37; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+                .college-title { font-family: 'Montserrat', sans-serif; font-size: ${isA4 ? '26px' : '18px'}; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: 1px; }
+                .college-subtitle { font-family: 'Montserrat', sans-serif; font-size: ${isA4 ? '14px' : '11px'}; font-weight: 700; color: #d4af37; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
                 
-                .award-title { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #fff; line-height: 1.1; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-                .award-subtitle { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; color: #d4af37; letter-spacing: 3px; }
+                .award-title { font-family: 'Montserrat', sans-serif; font-size: ${isA4 ? '42px' : '28px'}; font-weight: 900; letter-spacing: 4px; color: #fff; line-height: 1.1; margin-bottom: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+                .award-subtitle { font-family: 'Cinzel', serif; font-size: ${isA4 ? '22px' : '16px'}; font-weight: 700; color: #d4af37; letter-spacing: 3px; }
                 
                 .photo-circle {
-                    width: 300px; height: 300px; border-radius: 50%;
+                    width: ${isA4 ? '450px' : '300px'}; height: ${isA4 ? '450px' : '300px'}; border-radius: 50%;
                     overflow: hidden; position: relative;
                     margin: 0 auto;
                     background: #111;
@@ -821,12 +912,12 @@
                     position: relative;
                     background: linear-gradient(135deg, #ffd700, #b8860b, #ffd700);
                     color: #000;
-                    padding: 12px 50px;
+                    padding: ${isA4 ? '18px 80px' : '12px 50px'};
                     font-family: 'Cinzel', serif;
                     font-weight: 900;
-                    font-size: 28px;
+                    font-size: ${isA4 ? '40px' : '28px'};
                     letter-spacing: 2px;
-                    margin-top: 40px;
+                    margin-top: ${isA4 ? '60px' : '40px'};
                     box-shadow: 0 10px 20px rgba(0,0,0,0.6);
                     text-align: center;
                     white-space: nowrap;
@@ -840,18 +931,18 @@
                 .badge {
                     position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
                     background: #050508; border: 2px solid #d4af37; border-radius: 30px;
-                    padding: 6px 20px; font-size: 11px; color: #ffd700; letter-spacing: 2px; font-weight: 900;
+                    padding: 6px 20px; font-size: ${isA4 ? '13px' : '11px'}; color: #ffd700; letter-spacing: 2px; font-weight: 900;
                     box-shadow: 0 5px 10px rgba(0,0,0,0.7); font-family: 'Montserrat', sans-serif;
                 }
                 .description {
-                    margin-top: 35px;
+                    margin-top: ${isA4 ? '50px' : '35px'};
                     text-align: center;
-                    font-size: 13px;
+                    font-size: ${isA4 ? '18px' : '13px'};
                     color: #ddd;
                     line-height: 1.7;
-                    padding: 0 5px;
+                    padding: 0 15px;
                 }
-                .description span { color: #d4af37; font-weight: 900; font-size: 14px; }
+                .description span { color: #d4af37; font-weight: 900; font-size: ${isA4 ? '20px' : '14px'}; }
                 
                 @media print { body { background: #fff; } .cert-page { box-shadow: none; } .print-btn { display: none; } }
                 
@@ -859,10 +950,10 @@
             </style>
         </head>
         <body>
-            <button class="print-btn" onclick="window.print()">🖨️ PRINT CERTIFICATES (A5)</button>
+            <button class="print-btn" onclick="window.print()">🖨️ PRINT ${size} CERTIFICATES</button>
         `;
         certStudents.forEach(st => {
-            let title2 = currentCertType === 'weekly' ? 'OF THE WEEK' : 'OF THE YEAR';
+            let title2 = customEvent ? customEvent.toUpperCase() : (currentCertType === 'weekly' ? 'OF THE WEEK' : 'OF THE YEAR');
             let badgeTxt = currentCertType === 'weekly' ? 'WEEKLY CHAMPION' : 'ANNUAL CHAMPION';
             let defaultPhoto = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23333\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';
             let finalPhoto = st.photoUrl || defaultPhoto;
@@ -887,6 +978,7 @@
             
             html += `
             <div class="cert-page">
+                ${bgUrl ? `<div class="cert-bg-img" style="background-image:url('${bgUrl}')"></div>` : ''}
                 <div class="bg-gradient" style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;background:radial-gradient(circle at center, ${darkBg} 0%, ${darkerBg} 100%);"></div>
                 <div class="sparkles"></div>
                 <div class="content">
@@ -905,7 +997,7 @@
                         <div class="award-subtitle">${title2}</div>
                     </div>
                     
-                    <div class="photo-circle" style="border: 8px solid ${baseHex}; box-shadow: 0 0 45px ${glow}, inset 0 0 25px rgba(0,0,0,0.8);">
+                    <div class="photo-circle" style="border: ${isA4 ? '12px' : '8px'} solid ${baseHex}; box-shadow: 0 0 60px ${glow}, inset 0 0 25px rgba(0,0,0,0.8);">
                         <img src="${finalPhoto}" />
                     </div>
                     
@@ -924,6 +1016,91 @@
         pw.document.open();
         pw.document.write(html);
         pw.document.close();
+    }
+    async function prepareBulkPrint() {
+      showToast("Loading students..."); const res = await api({ action: "getStudentList" }); const pw = window.open('', '_blank');
+      pw.document.write(`<!DOCTYPE html><html><head><title>Batch QR</title><style>body{font-family:sans-serif;margin:0;padding:20px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.box{border:1px solid #ddd;padding:10px;text-align:center;page-break-inside:avoid;border-radius:8px}.qr{width:110px;height:110px;margin:5px auto;background:#fff}.lbl{font-size:9px;font-weight:900;text-transform:uppercase;line-height:1.4;margin-top:5px;color:#000}.btn{position:fixed;top:10px;right:10px;padding:12px 24px;background:#000;color:#fbff00;border:none;border-radius:8px;font-weight:900;cursor:pointer}@media print{.btn{display:none}@page{size:A4;margin:1cm}}</style></head><body><button class="btn" onclick="window.print()">PRINT A4 SHEET</button><div class="grid" id="g"></div><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"><\/script><script>function gen(){const ss=${JSON.stringify(res.students)},g=document.getElementById('g');if(typeof QRCode==='undefined'){setTimeout(gen,100);return;}ss.forEach(s=>{const b=document.createElement('div');b.className='box';const q=document.createElement('div');q.className='qr';const l=document.createElement('div');l.innerHTML=(s.name||'')+'<br>'+(s.dept||'')+' | '+(s.house||'');b.appendChild(q);b.appendChild(l);g.appendChild(b);try{new QRCode(q,{text:(s.name||'')+' | '+(s.dept||'')+' | '+(s.house||''),width:110,height:110});}catch(e){}});}gen();<\/script></body></html>`);
+      pw.document.close();
+    }
+    async function generateReport(period) {
+      const pw = window.open('', '_blank'); if (!pw) { showToast("❌ Popup blocked!"); return; }
+      pw.document.write(`<html><body style="font-family:sans-serif; text-align:center; margin-top:20vh; background:#111; color:#00ff88;"><h2>Fetching Database...<br><br>Please wait ⏳</h2></body></html>`);
+      showToast("📊 Generating " + (period === 'weekly' ? "Weekly" : "Annual") + " Report...");
+      try {
+        const res = await api({ action: "getReportData", period: period }); if (!res.success) { showToast("❌ Report failed: " + (res.error || '')); return; }
+        const titleText = period === 'weekly' ? 'WEEKLY REPORT' : 'ANNUAL REPORT', { overall, categoryResults, departments, houseConfig, categoryNames, images } = res;
+        const logoUrl = images.logo || '', rankLabels = ['🏆 WINNER', '🥈 RUNNER UP', '🥉 2ND RUNNER UP', '4TH PLACE'], rankColors = ['#d4af37', '#c0c0c0', '#cd7f32', '#888'];
+        const today = new Date().toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' }); const hColors = {}; houseConfig.forEach(h => hColors[h.name] = h.color);
+        function standingsTable(arr, title) { let html = `<div class="section-title">${title}</div><table class="standings"><tr><th>RANK</th><th>HOUSE</th><th>POINTS</th></tr>`; arr.forEach(([name, pts], i) => { const bg = i === 0 ? 'rgba(212,175,55,0.15)' : i === 1 ? 'rgba(192,192,192,0.10)' : i === 2 ? 'rgba(205,127,50,0.10)' : ''; html += `<tr style="background:${bg}"><td class="rank-cell"><span style="color:${rankColors[i]||'#888'};font-weight:900;">${rankLabels[i]||(i+1)}</span></td><td><span class="house-dot" style="background:${hColors[name]||'#888'}"></span>${name}</td><td class="pts-cell">${pts}</td></tr>`; }); html += '</table>'; return html; }
+        function catRow(catName, arr) { let row = `<tr><td class="cat-name">${catName}</td>`; arr.forEach(([name, pts], i) => { const icon = i === 0 ? '🏆' : i === 1 ? '🥈' : i === 2 ? '🥉' : ''; row += `<td>${icon} ${name} <b>(${pts})</b></td>`; }); for (let i = arr.length; i < 4; i++) row += '<td>—</td>'; row += '</tr>'; return row; }
+        let page1 = `<div class="page"><div class="report-header">${logoUrl ? `<img src="${logoUrl}" class="college-logo">` : ''}<div class="college-name">DON BOSCO POLYTECHNIC COLLEGE</div><div class="college-sub">Givers of All Talents Students</div><div class="report-title">G.O.A.T.S CHAMPIONSHIP — ${titleText}</div><div class="report-date">${today}</div></div>${standingsTable(overall, '🏆 OVERALL HOUSE CHAMPIONSHIP')}<div class="section-title">📊 CATEGORY WISE RESULTS</div><table class="cat-table"><tr><th>CATEGORY</th><th>🏆 WINNER</th><th>🥈 RUNNER</th><th>🥉 2ND RUNNER</th><th>4TH</th></tr>${categoryNames.map(c => catRow(c, categoryResults[c] || [])).join('')}</table><div class="signature-area"><div class="sig-line"></div><div class="sig-label">PRINCIPAL</div><div class="sig-sub">Don Bosco Polytechnic College</div></div></div>`;
+        let deptPages = ''; const deptNames = Object.keys(departments).sort();
+        deptNames.forEach(deptName => { const d = departments[deptName]; deptPages += `<div class="page"><div class="report-header">${logoUrl ? `<img src="${logoUrl}" class="college-logo-sm">` : ''}<div class="college-name" style="font-size:18px;">DON BOSCO POLYTECHNIC COLLEGE</div><div class="college-sub">Givers of All Talents Students</div><div class="dept-title">DEPARTMENT OF ${deptName.toUpperCase()}</div><div class="report-date">${today}</div></div>${standingsTable(d.houses, '🏆 HOUSE STANDINGS — ' + deptName.toUpperCase())}<div class="section-title">📊 CATEGORY BREAKDOWN</div><table class="cat-table"><tr><th>CATEGORY</th><th>🏆 WINNER</th><th>🥈 RUNNER</th><th>🥉 2ND RUNNER</th><th>4TH</th></tr>${categoryNames.map(c => catRow(c, d.categories[c] || [])).join('')}</table>${d.toppers.length > 0 ? `<div class="section-title">⭐ TOP CONTRIBUTORS</div><table class="toppers"><tr><th>#</th><th>STUDENT NAME</th><th>POINTS</th></tr>${d.toppers.slice(0,10).map(([name, pts], i) => `<tr><td>${i+1}</td><td>${name}</td><td class="pts-cell">${pts}</td></tr>`).join('')}</table>` : ''}<div class="signature-area"><div style="display:flex;justify-content:space-between;gap:40px;"><div style="text-align:center;flex:1;"><div class="sig-line"></div><div class="sig-label">HEAD OF DEPARTMENT</div><div class="sig-sub">${deptName}</div></div><div style="text-align:center;flex:1;"><div class="sig-line"></div><div class="sig-label">PRINCIPAL</div><div class="sig-sub">Don Bosco Polytechnic College</div></div></div></div></div>`; });
+        pw.document.open();
+        pw.document.write(`<!DOCTYPE html><html><head><title>G.O.A.T.S Report</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:sans-serif;background:#fff;color:#111;padding:0;}.page{width:210mm;min-height:297mm;margin:0 auto;padding:15mm 15mm;page-break-after:always;position:relative;background:white;}.page:last-child{page-break-after:auto;}.print-btn{position:fixed;top:16px;right:16px;z-index:999;padding:14px 32px;background:#111;color:#fbff00;border:none;border-radius:10px;font-weight:900;font-size:14px;cursor:pointer;letter-spacing:1px;}.report-header{text-align:center;margin-bottom:20px;padding-bottom:12px;border-bottom:3px double #333;}.college-logo{width:60px;height:60px;object-fit:contain;margin-bottom:4px;}.college-logo-sm{width:50px;height:50px;object-fit:contain;margin-bottom:4px;}.college-name{font-size:20px;font-weight:900;letter-spacing:2px;text-transform:uppercase;}.college-sub{font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin:2px 0;}.report-title{font-size:15px;font-weight:900;color:#b8860b;letter-spacing:2px;margin-top:6px;}.dept-title{font-size:15px;font-weight:900;color:#333;letter-spacing:2px;margin-top:6px;border:2px solid #333;display:inline-block;padding:4px 16px;border-radius:6px;}.report-date{font-size:10px;color:#999;margin-top:4px;}.section-title{font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#333;margin:16px 0 8px;padding:4px 10px;background:#f5f5f5;border-left:4px solid #d4af37;border-radius:4px;page-break-after:avoid;}.standings{width:100%;border-collapse:collapse;margin-bottom:16px;}.standings th{background:#111;color:#fbff00;padding:8px 12px;text-align:left;font-size:10px;letter-spacing:2px;}.standings td{padding:10px 12px;border-bottom:1px solid #eee;font-size:13px;}.standings .rank-cell{width:160px;}.standings .pts-cell{font-weight:900;font-size:16px;text-align:right;}.house-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle;}.cat-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:10px;}.cat-table th{background:#222;color:#fff;padding:6px 8px;text-align:left;font-size:9px;letter-spacing:1px;}.cat-table td{padding:6px 8px;border-bottom:1px solid #eee;}.cat-table .cat-name{font-weight:900;text-transform:uppercase;letter-spacing:1px;background:#fafafa;}.cat-table b{color:#333;}.toppers{width:100%;border-collapse:collapse;margin-bottom:12px;}.toppers th{background:#1a5e1a;color:white;padding:6px 10px;text-align:left;font-size:9px;letter-spacing:1px;}.toppers td{padding:6px 10px;border-bottom:1px solid #eee;font-size:11px;}.toppers .pts-cell{font-weight:900;text-align:right;}table,tr,td,th{page-break-inside:avoid;}.signature-area{margin-top:30px;padding-top:10px;page-break-inside:avoid;}.sig-line{width:200px;border-bottom:1px solid #333;margin:0 auto 6px;}.sig-label{font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-align:center;}.sig-sub{font-size:9px;color:#888;text-align:center;}@media print{.print-btn{display:none !important;}@page{size:A4 portrait;margin:10mm;}body{padding:0;background:#fff;}.page{padding:0mm;margin:0;width:100%;min-height:auto;box-shadow:none;page-break-after:always;}.signature-area{page-break-inside:avoid;}table{page-break-inside:auto;}tr{page-break-inside:avoid;page-break-after:auto;}}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ PRINT REPORT</button>${page1}${deptPages}</body></html>`);
+        pw.document.close(); showToast("✅ Report generated!");
+      } catch (e) { if (pw && !pw.closed) { pw.document.body.innerHTML = `<h3 style="color:red;font-family:sans-serif;">❌ Error generating report.</h3>`; } showToast("❌ Error: " + e.message); }
+    }
+    let evCertPhoto = null;
+    function previewEvPhoto(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          evCertPhoto = e.target.result;
+          document.getElementById('ev-photo-preview-wrap').style.display = 'block';
+          document.getElementById('ev-photo-preview').src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function openEventCertModal() {
+      document.getElementById('event-cert-modal').style.display = 'block';
+      const cache = JSON.parse(localStorage.getItem('goats_cache') || '{}');
+      const hSel = document.getElementById('ev-student-house'); hSel.innerHTML = '<option value="">NONE</option>';
+      if (cache.houseConfig) cache.houseConfig.forEach(h => hSel.add(new Option(h.name, h.name)));
+      
+      const inp = document.getElementById('ev-student-search'), ac = document.getElementById('ev-autocomplete'), deptInp = document.getElementById('ev-student-dept');
+      api({ action: "getStudentList" }).then(res => {
+        if (!res.success) return;
+        inp.oninput = (e) => {
+          const val = e.target.value.toLowerCase().trim(); ac.innerHTML = '';
+          if (val.length >= 2) {
+            const matches = res.students.filter(s => s.name.toLowerCase().includes(val));
+            if (matches.length > 0) {
+              ac.style.display = 'block';
+              matches.slice(0, 10).forEach(s => {
+                const div = document.createElement('div');
+                div.style.padding = '12px'; div.style.cursor = 'pointer'; div.style.borderBottom = '1px solid rgba(255,255,255,0.05)'; div.style.color = '#fff';
+                div.innerHTML = `<b>${s.name}</b> <small style="color:#888;">(${s.dept})</small>`;
+                div.onclick = () => { inp.value = s.name; deptInp.value = s.dept; if (s.house) hSel.value = s.house; ac.style.display = 'none'; };
+                ac.appendChild(div);
+              });
+            } else ac.style.display = 'none';
+          } else ac.style.display = 'none';
+        };
+      });
+    }
+    function closeEventCertModal() { document.getElementById('event-cert-modal').style.display = 'none'; }
+    function generateEventCert() {
+      const prog = document.getElementById('ev-prog-title').value.trim() || 'COLLEGE PROGRAM';
+      const cat = document.getElementById('ev-category').value;
+      const event = document.getElementById('ev-event-name').value.trim() || 'EVENT';
+      const student = document.getElementById('ev-student-search').value.trim();
+      const dept = document.getElementById('ev-student-dept').value || 'DEPARTMENT';
+      const house = document.getElementById('ev-student-house').value || 'NONE';
+      const rank = document.getElementById('ev-rank').value;
+      
+      if (!student) { showToast("⚠️ Enter student name!"); return; }
+      const pw = window.open('', '_blank');
+      const cache = JSON.parse(localStorage.getItem('goats_cache') || '{}');
+      const logoUrl = cache.images?.logo || '', founderUrl = cache.images?.founder || '';
+      const wordings = {
+        sports: `Demonstrating exceptional athleticism and sportsmanship, your outstanding performance in this sporting arena has contributed immensely to the legacy of our institution.`,
+        cultural: `Showcasing immense creativity and artistic talent, your graceful participation has enriched the cultural fabric of our college and inspired the entire community.`,
+        academic: `Exhibiting scholarly excellence and intellectual prowess, your dedication to academic mastery serves as a beacon of inspiration for your fellow students.`
+      };
+      const html = `<!DOCTYPE html><html><head><title>Certificate - ${student}</title><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0;}body{background:#555;font-family:'Montserrat',sans-serif;}.page{width:210mm;height:297mm;background:#fff;margin:0 auto;position:relative;overflow:hidden;color:#000;padding:60px;}.border-outer{position:absolute;top:20px;left:20px;right:20px;bottom:20px;border:4px solid #d4af37;} .border-inner{position:absolute;top:30px;left:30px;right:30px;bottom:30px;border:1px solid #b8860b;}.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;position:relative;z-index:10;}.logo{width:100px;height:100px;object-fit:contain;}.founder{width:100px;height:100px;border-radius:50%;border:2px solid #d4af37;object-fit:cover;}.college-info{text-align:center;flex:1;}.college-info h1{font-size:28px;font-weight:900;margin-bottom:5px;letter-spacing:1px;}.college-info p{font-size:12px;color:#666;letter-spacing:3px;text-transform:uppercase;}.prog-title{text-align:center;margin:30px 0;font-family:'Cinzel',serif;font-size:48px;font-weight:900;color:#d4af37;text-transform:uppercase;letter-spacing:4px;width:100%;}.cert-content{text-align:center;margin-top:20px;position:relative;z-index:10;}.award-label{font-family:'Cinzel',serif;font-size:24px;letter-spacing:4px;margin-bottom:10px;}.student-name{font-size:62px;font-weight:900;color:#000;margin:15px 0;text-decoration:underline;text-decoration-color:#d4af37;}.event-details{font-size:18px;margin:15px 0;font-weight:700;letter-spacing:1px;}.wording{font-size:18px;line-height:1.8;color:#555;margin:40px auto;max-width:85%;font-style:italic;}.photo-box{width:180px;height:180px;border-radius:50%;border:5px solid #d4af37;margin:30px auto;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.15);}.photo-box img{width:100%;height:100%;object-fit:cover;}.signatures{display:flex;justify-content:space-between;margin-top:80px;padding:0 40px;}.sig-box{text-align:center;width:240px;}.sig-line{border-top:2px solid #333;margin-bottom:10px;}.sig-label{font-weight:900;font-size:14px;letter-spacing:2px;}.sig-sub{font-size:11px;color:#777;}@media print{body{background:#fff;}.page{box-shadow:none;}.print-btn{display:none;}@page{size:A4 portrait;margin:0;}} .print-btn{position:fixed;top:20px;right:20px;z-index:1000;background:#000;color:#fff;border:none;padding:15px 30px;border-radius:30px;font-weight:900;cursor:pointer;}</style></head><body><button class="print-btn" onclick="window.print()">🖨️ PRINT CERTIFICATE</button><div class="page"><div class="border-outer"></div><div class="border-inner"></div><div class="header">${logoUrl?`<img src="${logoUrl}" class="logo">`:''}<div class="college-info"><h1>DON BOSCO POLYTECHNIC COLLEGE</h1><p>Givers of All Talents Students</p></div>${founderUrl?`<img src="${founderUrl}" class="founder">`:''}</div><div class="prog-title">${prog}</div><div class="cert-content"><div class="award-label">CERTIFICATE OF ACHIEVEMENT</div><div style="font-size:14px;letter-spacing:3px;color:#777;margin-top:10px;">This is to certify that</div><div class="student-name">${student.toUpperCase()}</div><div class="event-details">of <b>${dept.toUpperCase()} DEPARTMENT</b> ${house?`| <b>${house.toUpperCase()} HOUSE</b>`:''}</div><div class="event-details">has secured <b>${rank.toUpperCase()}</b> in the event <b>"${event.toUpperCase()}"</b></div>${evCertPhoto?`<div class="photo-box"><img src="${evCertPhoto}"></div>`:''}<div class="wording">${wordings[cat]}</div></div><div class="signatures"><div class="sig-box"><div class="sig-line"></div><div class="sig-label">SECRETARY</div><div class="sig-sub">Don Bosco Polytechnic College</div></div><div class="sig-box"><div class="sig-line"></div><div class="sig-label">PRINCIPAL</div><div class="sig-sub">Don Bosco Polytechnic College</div></div></div></div></body></html>`;
+      pw.document.open(); pw.document.write(html); pw.document.close();
     }
     
     async function prepareBulkPrint() {
