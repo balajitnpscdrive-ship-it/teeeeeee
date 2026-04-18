@@ -21,10 +21,12 @@
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; min-height: 100vh; overflow-x: hidden; }
+
     .preloader { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #050508; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
     .loader-pulse { animation: pulseLogo 0.8s infinite alternate; }
     @keyframes pulseLogo { from { transform: scale(0.9); filter: drop-shadow(0 0 10px rgba(251,255,0,0)); } to { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--neon)); } }
     .bg-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; background-size: cover; background-position: center; filter: brightness(0.2) blur(6px); }
+
     .header { padding: calc(10px + env(safe-area-inset-top)) 14px 12px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; gap: 8px; background: rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 0; z-index: 100; }
     .logo-img { width: 54px; height: 54px; object-fit: contain; border-radius: 8px; }
     .founder-img { width: 54px; height: 54px; border-radius: 50%; border: 2px solid var(--neon); object-fit: cover; justify-self: end; }
@@ -35,6 +37,7 @@
     #sync-status { position: fixed; bottom: 12px; right: 12px; font-size: 8px; font-weight: 900; text-transform: uppercase; padding: 4px 8px; border-radius: 20px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.08); z-index: 200; }
     .status-live { color: var(--green) !important; border-color: rgba(0,255,136,.3) !important; }
     .status-offline { color: var(--red) !important; border-color: rgba(255,65,108,.3) !important; }
+
     #dept-gate { padding: 20px 14px; max-width: 900px; margin: auto; }
     .gate-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 20px; }
     .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
@@ -43,6 +46,7 @@
     .dept-card-icon { font-size: 32px; margin-bottom: 8px; }
     .dept-card b { display: block; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; word-wrap: break-word; }
     .dept-card-bar { height: 3px; background: linear-gradient(90deg, var(--neon), var(--accent)); border-radius: 3px; margin: 10px auto 0; width: 80%; opacity: .8; }
+
     #login-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
     .modal-box { background: rgba(20,20,25,1); border: 1px solid rgba(251,255,0,.4); border-radius: 24px; padding: 32px 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 0 60px rgba(251,255,0,.15); }
     .modal-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--neon); letter-spacing: 3px; margin-bottom: 20px; }
@@ -51,6 +55,7 @@
     textarea { resize: none; min-height: 50px; font-size: 14px; }
     option { background: #1a1a1a; color: white; }
     .btn-main { width: 100%; padding: 16px; border-radius: 12px; background: var(--neon); color: black; font-weight: 900; border: none; cursor: pointer; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 18px; margin-top: 5px; }
+
     #teacher-view { max-width: 600px; margin: auto; padding-bottom: 40px; }
     .scoreboard { padding: 16px; background: rgba(0,0,0,0.85); border-bottom: 1px solid rgba(255,255,255,0.07); }
     .sb-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; text-align: center; }
@@ -61,8 +66,10 @@
     .chip-score { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1.1; color: white; }
     .chip-rank { font-size: 14px; position: absolute; top: -8px; right: -4px; }
     .t-panel { margin: 16px; background: rgba(10,10,18,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 16px 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+
     .activity-group { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5); }
     .activity-title { font-size: 14px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; text-align: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px; }
+
     .medal-section { margin-bottom: 16px; }
     .medal-section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 12px; }
     .medal-row { display: flex; gap: 8px; justify-content: center; align-items: flex-end; margin-bottom: 8px; }
@@ -85,6 +92,7 @@
     .medal-deduct.selected { box-shadow: 0 0 25px rgba(255,65,108,0.7); transform: scale(1.1); }
     .medal-deduct .medal-icon { font-size: 20px; }
     .medal-deduct .medal-pts { color: white; font-size: 10px; }
+
     /* ── NEW: Fixed +10 / -5 quick-action buttons ── */
     .quick-btns { display: flex; gap: 10px; margin: 12px 0 16px; }
     .quick-btn { flex: 1; border: none; border-radius: 14px; padding: 14px 8px; cursor: pointer; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: all 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
@@ -99,6 +107,7 @@
     .quick-divider { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; }
     .quick-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.12); }
     .quick-divider-txt { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25); white-space: nowrap; }
+
     @keyframes medalFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
     .medal-btn.selected { animation: none !important; }
     @keyframes medalStamp { 0% { transform: scale(1); } 30% { transform: scale(0.85) rotate(-3deg); } 60% { transform: scale(1.15) rotate(2deg); } 100% { transform: scale(1.1); } }
@@ -106,6 +115,7 @@
     .tier-indicator { text-align: center; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 8px; border-radius: 10px; margin-bottom: 16px; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: var(--gold); transition: all 0.3s; }
     .tier-indicator.negative { background: rgba(255,65,108,0.1); border-color: rgba(255,65,108,0.3); color: var(--red); }
     .tier-indicator.positive-fixed { background: rgba(0,255,136,0.1); border-color: rgba(0,255,136,0.3); color: var(--green); }
+
     .house-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
     .house-btn { padding: 28px 4px; border-radius: 16px; border: none; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: black; cursor: pointer; position: relative; }
     .house-btn:active { transform: scale(0.94); }
@@ -117,11 +127,13 @@
     .btn-sub { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; width: 100%; margin-bottom: 14px; letter-spacing: 1px; }
     .remarks-wrap { margin-bottom: 14px; }
     .remarks-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+
     .admin-section { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
     .btn-admin { padding: 14px 10px; border-radius: 12px; background: transparent; font-weight: 900; cursor: pointer; font-size: 12px; letter-spacing: 1px; font-family: inherit; }
     .upload-box { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); padding: 12px 14px; border-radius: 12px; margin-bottom: 8px; }
     .upload-box label { font-size: 10px; color: var(--accent); display: block; margin-bottom: 6px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
     .btn-logout { width: calc(100% - 32px); margin: 16px; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: rgba(255,255,255,0.7); font-weight: 600; cursor: pointer; letter-spacing: 1px; }
+
     #lb-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #050508; flex-direction: column; z-index: 3000; overflow-x: hidden; overflow-y: auto; }
     .lb-header { padding: 16px; background: rgba(0,0,0,1); border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
     .lb-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; flex: 1; }
@@ -145,6 +157,7 @@
     .lb-bar-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-top: 4px; overflow: hidden; }
     .lb-bar-fill { height: 100%; transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .lb-row-pts { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--neon); }
+
     #toast { position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%); background: rgba(15,15,20,0.95); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: white; padding: 14px 28px; border-radius: 50px; z-index: 5000; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; white-space: nowrap; }
     #toast.show { bottom: 28px; opacity: 1; }
     .shimmer { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmerFlow 1.5s infinite linear; border-radius: 8px; }
@@ -166,6 +179,7 @@
   <div id="sync-status">OFFLINE</div>
   <div class="bg-overlay" id="main-bg"></div>
   <div id="toast"></div>
+
   <!-- CINEMATIC PAPER POPUP -->
   <div id="paper-popup">
     <div style="font-size:16px;font-weight:900;color:var(--neon);letter-spacing:2px;text-transform:uppercase;" id="pop-status">🎉 POINT AWARDED 🎉</div>
@@ -176,6 +190,7 @@
     <div id="pop-house" style="color:black;padding:12px 20px;border-radius:14px;font-weight:900;font-size:20px;letter-spacing:2px;text-transform:uppercase;box-shadow:inset 0 0 10px rgba(0,0,0,0.5);">HOUSE</div>
     <div id="pop-remarks"></div>
   </div>
+
   <div class="header">
     <img id="m-logo" class="logo-img">
     <div class="header-title">
@@ -185,6 +200,7 @@
     </div>
     <img id="m-founder" class="founder-img">
   </div>
+
   <!-- LEADERBOARD MODAL -->
   <div id="lb-modal" style="display:none;">
     <div class="lb-header">
@@ -198,6 +214,7 @@
     <div class="lb-filters" id="lb-cat-filters"></div>
     <div class="lb-body" id="lb-body"><div class="lb-empty">Loading...</div></div>
   </div>
+
   <!-- CERTIFICATE GENERATOR MODAL -->
   <div id="cert-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#050508; z-index:4000; overflow-y:auto; padding-bottom:50px;">
     <div class="lb-header">
@@ -209,11 +226,13 @@
       <div id="cert-list"></div>
     </div>
   </div>
+
   <!-- DEPARTMENT GRID -->
   <div id="dept-gate" style="display:block;">
     <p class="gate-title">SELECT DEPARTMENT</p>
     <div id="dept-grid" class="dept-grid"></div>
   </div>
+
   <!-- LOGIN MODAL -->
   <div id="login-modal" style="display:none;" onclick="if(event.target==this)closeLogin()">
     <div class="modal-box">
@@ -222,6 +241,7 @@
       <button class="btn-main" onclick="handleLogin()">ENTER PORTAL</button>
     </div>
   </div>
+
   <!-- TEACHER / ADMIN VIEW -->
   <div id="teacher-view" style="display:none;">
     <div class="scoreboard" style="display:none;">
@@ -230,18 +250,22 @@
     </div>
     <div class="t-panel">
       <div id="dept-label" style="font-size:11px;color:var(--accent);font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;text-align:center;"></div>
+
       <!-- STAFF NAME DROPDOWN -->
       <div id="staff-area" style="margin-bottom:14px;">
         <select id="t-name">
           <option value="" disabled selected>👤 Select Your Name</option>
         </select>
       </div>
+
       <div id="teacher-actions">
+
         <!-- ══════════════════════════════════════
              GROUP ACTIVITY SECTION
              ══════════════════════════════════════ -->
         <div class="activity-group" id="grp-activity-section">
           <div class="activity-title" style="color:#fbff00;">👥 GROUP ACTIVITY (TEAM PLAY)</div>
+
           <!-- Placement medals (admin-configurable points) -->
           <div class="medal-section-label">🏅 SELECT THEIR PLACE</div>
           <div class="medal-row">
@@ -250,12 +274,14 @@
             <button class="medal-btn medal-3rd" id="medal-3-grp" onclick="selectGroupTier('3rd')"><span class="medal-icon">🥉</span><span class="medal-pts medal-3-pts">+5</span></button>
           </div>
           <div class="tier-indicator" id="tier-indicator-grp">🥇 1ST PLACE — +15 POINTS</div>
+
           <!-- Divider -->
           <div class="quick-divider">
             <div class="quick-divider-line"></div>
             <div class="quick-divider-txt">OR QUICK POINTS</div>
             <div class="quick-divider-line"></div>
           </div>
+
           <!-- Fixed +10 / -5 quick buttons for Group -->
           <div class="quick-btns">
             <button class="quick-btn quick-btn-pos" id="qbtn-pos-grp" onclick="selectGroupTier('fixed_pos')">
@@ -269,18 +295,22 @@
               <span class="qb-lbl">NEGATIVE</span>
             </button>
           </div>
+
           <!-- House selection grid -->
           <div id="house-grid" class="house-grid"></div>
+
           <div class="remarks-wrap" style="margin-bottom:0;">
             <div class="remarks-label">📝 GROUP REMARKS (OPTIONAL)</div>
             <textarea id="remarks-group" placeholder="Reason for group points..." rows="2"></textarea>
           </div>
         </div>
+
         <!-- ══════════════════════════════════════
              INDIVIDUAL ACTIVITY SECTION
              ══════════════════════════════════════ -->
         <div class="activity-group" id="ind-activity-section">
           <div class="activity-title" style="color:#00d4ff;">👤 INDIVIDUAL STUDENT</div>
+
           <!-- Placement medals (admin-configurable points) -->
           <div class="medal-section-label">🏅 SELECT PLACE</div>
           <div class="medal-row">
@@ -288,12 +318,14 @@
             <button class="medal-btn medal-1st selected" id="medal-1-ind" onclick="selectIndivTier('1st')"><span class="medal-icon">🥇</span><span class="medal-pts medal-1-pts">+15</span></button>
             <button class="medal-btn medal-3rd" id="medal-3-ind" onclick="selectIndivTier('3rd')"><span class="medal-icon">🥉</span><span class="medal-pts medal-3-pts">+5</span></button>
           </div>
+
           <!-- Divider -->
           <div class="quick-divider" style="margin-top:4px;">
             <div class="quick-divider-line"></div>
             <div class="quick-divider-txt">OR QUICK POINTS</div>
             <div class="quick-divider-line"></div>
           </div>
+
           <!-- Fixed +10 / -5 quick buttons for Individual -->
           <div class="quick-btns">
             <button class="quick-btn quick-btn-pos" id="qbtn-pos-ind" onclick="selectIndivTier('fixed_pos')">
@@ -307,7 +339,9 @@
               <span class="qb-lbl">NEGATIVE</span>
             </button>
           </div>
+
           <div class="tier-indicator" id="tier-indicator-ind">🥇 1ST PLACE — +15 POINTS</div>
+
           <!-- Scanner & Manual -->
           <div class="scan-area" id="cam-area">
             <button id="cam-btn" onclick="toggleCam()">📷</button>
@@ -324,13 +358,16 @@
             </div>
             <button class="btn-sub" onclick="submitManual()">✓ SUBMIT MANUALLY</button>
           </div>
+
           <div class="remarks-wrap" style="margin-bottom:0; margin-top:14px;">
             <div class="remarks-label">📝 INDIVIDUAL REMARKS (OPTIONAL)</div>
             <textarea id="remarks-indiv" placeholder="Reason for individual points..." rows="2"></textarea>
           </div>
         </div>
       </div>
+
       <div class="meta-row" id="teacher-meta"><select id="p-cat" style="margin-bottom:0;"></select></div>
+
       <!-- ADMIN ACTIONS -->
       <div id="admin-actions" class="admin-section" style="display:none;">
         <div style="display:flex; gap:10px; margin-bottom:10px;">
@@ -345,6 +382,7 @@
         <button class="btn-admin" style="color:#00ff88;border:1px solid #00ff88;" onclick="toggleBranding()">🎨 BRANDING DASHBOARD</button>
         <button class="btn-admin" style="color:white;border:1px dashed rgba(255,255,255,0.4);" onclick="prepareBulkPrint()">🖨️ BULK QR SYSTEM (A4)</button>
         <button class="btn-admin" style="color:white;border:1px solid rgba(255,255,255,0.15);" onclick="forceSync()">🔄 SYNC DATA CACHE</button>
+
         <div id="admin-webapp-form" style="display:none; margin-top:4px; padding-top:16px; border-top:1px dashed rgba(255,255,255,.2);">
           <div class="upload-box"><label>App Name</label><input type="text" id="new-app-name" placeholder="e.g. Scoreboard"></div>
           <div class="upload-box"><label>URL Link</label><input type="text" id="new-app-url" placeholder="https://..."></div>
@@ -359,18 +397,22 @@
       </div>
     </div>
     <button class="btn-logout" onclick="logout()">← LOGOUT</button>
+
     <!-- UNDO SNACKBAR -->
     <div id="undo-snackbar" style="display:none; position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:rgba(20,20,25,0.95); color:white; padding:12px 16px 12px 24px; border-radius:30px; font-weight:600; font-size:14px; z-index:9999; box-shadow:0 10px 40px rgba(0,0,0,0.8); border:1px solid rgba(251,255,0,0.3); align-items:center; gap:16px; backdrop-filter:blur(10px);">
       <span>Sending point to database...</span>
       <button onclick="undoPoint()" style="background:var(--neon); color:#000; font-family:'Bebas Neue', sans-serif; letter-spacing:2px; font-size:16px; border:none; padding:8px 20px; border-radius:20px; cursor:pointer; box-shadow:0 0 15px rgba(251,255,0,0.4);">UNDO</button>
     </div>
   </div>
+
   <script>
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(console.error); }
+
     /* ============================================================
        CONFIG
     ============================================================ */
-    const API = "https://script.google.com/macros/s/AKfycbz8WDRNhr0F6LdHAII9LEfQ_XY9ByhZT8PlVU4mvBGY8ZfwmoDqlWnB3bzsOQ8Cnlt1/exec";
+    const API = "https://script.google.com/macros/s/AKfycbxq0C74S-OzHbzaHGo1ZmZs_2Y0mExaqVKjIdOTsoeEbf5TBLtWjXTQ55NDww0tYWGYFA/exec";
+
     /* ============================================================
        GLOBAL STATE
     ============================================================ */
@@ -386,16 +428,19 @@
     // Fixed quick-point values — NOT from admin sheet, always +10 / -5
     const FIXED_POS = 10;
     const FIXED_NEG = -5;
+
     const tierMedals = { '1st': '🥇', '2nd': '🥈', '3rd': '🥉', 'individual': '⭐', 'deduct': '➖', 'fixed_pos': '✅', 'fixed_neg': '❌' };
     const tierLabels = { '1st': '1ST PLACE', '2nd': '2ND PLACE', '3rd': '3RD PLACE', 'individual': 'INDIVIDUAL', 'deduct': 'DEDUCTION', 'fixed_pos': 'POSITIVE POINT', 'fixed_neg': 'NEGATIVE POINT' };
     let currentCertType = '';
     let certStudents = [];
+
     /* ── Point resolver — handles both configurable and fixed tiers ── */
     function getTierPoints(tier) {
       if (tier === 'fixed_pos') return FIXED_POS;
       if (tier === 'fixed_neg') return FIXED_NEG;
       return pointSettings[tier] ?? 0;
     }
+
     /* ============================================================
        SOUND SYNTHESIZER
     ============================================================ */
@@ -421,7 +466,9 @@
         }
       } catch (e) {}
     }
+
     function api(payload) { return fetch(API, { method: "POST", body: JSON.stringify(payload) }).then(r => r.json()); }
+
     /* ============================================================
        BOOT
     ============================================================ */
@@ -451,6 +498,7 @@
       } catch (e) { st.innerText = "🔴 OFFLINE"; st.className = "status-offline"; }
       const pl = document.getElementById('preloader');
       if (pl) { pl.style.opacity = '0'; setTimeout(() => pl.style.display = 'none', 600); }
+
       api({ action: "getStudentList" }).then(res => {
         if (res && res.success) {
           const inp = document.getElementById('man-name'), ac = document.getElementById('student-autocomplete'), hs = document.getElementById('man-house');
@@ -477,6 +525,7 @@
       selectGroupTier('1st');
       selectIndivTier('1st');
     }
+
     function updateMedalDisplay() {
       // Group points
       document.querySelector('#medal-1-grp .medal-pts').innerText = '+' + pointSettings['g_1st'];
@@ -494,12 +543,14 @@
       selectGroupTier(currentGroupTier);
       selectIndivTier(currentIndivTier);
     }
+
     /* ── GROUP TIER SELECTION (medals + quick buttons) ── */
     function selectGroupTier(tier) {
       currentGroupTier = tier;
       const pts = getTierPoints(tier);
       const isNeg = pts < 0;
       const isFixed = tier === 'fixed_pos' || tier === 'fixed_neg';
+
       // Clear all medal selections
       ['medal-1-grp', 'medal-2-grp', 'medal-3-grp'].forEach(id => {
         const el = document.getElementById(id); if (el) el.classList.remove('selected', 'medal-stamp');
@@ -508,6 +559,7 @@
       ['qbtn-pos-grp', 'qbtn-neg-grp'].forEach(id => {
         const el = document.getElementById(id); if (el) el.classList.remove('selected');
       });
+
       if (!isFixed) {
         const targetId = { '1st': 'medal-1-grp', '2nd': 'medal-2-grp', '3rd': 'medal-3-grp' }[tier];
         const targetEl = document.getElementById(targetId);
@@ -519,18 +571,21 @@
         const qid = tier === 'fixed_pos' ? 'qbtn-pos-grp' : 'qbtn-neg-grp';
         const qel = document.getElementById(qid); if (qel) qel.classList.add('selected');
       }
+
       const ind = document.getElementById('tier-indicator-grp');
       if (ind) {
         ind.innerText = `${tierMedals[tier]} ${tierLabels[tier]} — ${pts > 0 ? '+' : ''}${pts} POINTS`;
         ind.className = 'tier-indicator' + (isNeg ? ' negative' : isFixed && !isNeg ? ' positive-fixed' : '');
       }
     }
+
     /* ── INDIVIDUAL TIER SELECTION (medals + quick buttons) ── */
     function selectIndivTier(tier) {
       currentIndivTier = tier;
       const pts = getTierPoints(tier);
       const isNeg = pts < 0;
       const isFixed = tier === 'fixed_pos' || tier === 'fixed_neg';
+
       // Clear all medal selections
       ['medal-1-ind', 'medal-2-ind', 'medal-3-ind', 'medal-ind-ind', 'medal-neg-ind'].forEach(id => {
         const el = document.getElementById(id); if (el) el.classList.remove('selected', 'medal-stamp');
@@ -539,6 +594,7 @@
       ['qbtn-pos-ind', 'qbtn-neg-ind'].forEach(id => {
         const el = document.getElementById(id); if (el) el.classList.remove('selected');
       });
+
       if (!isFixed) {
         const targetId = { '1st': 'medal-1-ind', '2nd': 'medal-2-ind', '3rd': 'medal-3-ind', 'individual': 'medal-ind-ind', 'deduct': 'medal-neg-ind' }[tier];
         const targetEl = document.getElementById(targetId);
@@ -550,11 +606,13 @@
         const qid = tier === 'fixed_pos' ? 'qbtn-pos-ind' : 'qbtn-neg-ind';
         const qel = document.getElementById(qid); if (qel) qel.classList.add('selected');
       }
+
       const ind = document.getElementById('tier-indicator-ind');
       if (ind) {
         ind.innerText = `${tierMedals[tier]} ${tierLabels[tier]} — ${pts > 0 ? '+' : ''}${pts} POINTS`;
         ind.className = 'tier-indicator' + (isNeg ? ' negative' : isFixed && !isNeg ? ' positive-fixed' : '');
       }
+
       let metaTheme = document.querySelector('meta[name="theme-color"]');
       if (!metaTheme) { metaTheme = document.createElement('meta'); metaTheme.name = "theme-color"; document.head.appendChild(metaTheme); }
       metaTheme.content = {
@@ -563,8 +621,10 @@
         'fixed_pos': '#00ff88', 'fixed_neg': '#ff416c'
       }[tier] || '#fbff00';
     }
+
     const deptIcons = { 'cse':'💻','it':'🖥️','ece':'📡','eee':'⚡','mech':'⚙️','civil':'🏗️','auto':'🚗','chem':'🧪','arch':'🏛️','admin':'👑','mca':'🖱️','bca':'📱','arts':'🎨','science':'🔬','commerce':'📊' };
     function getIcon(d) { const k = d.toLowerCase().replace(/\s+/g,''); for (const key in deptIcons) { if (k.includes(key)) return deptIcons[key]; } return '📚'; }
+
     function render(data) {
       if (!data) return;
       const { images, houseConfig, deptList, categories, appLinks } = data;
@@ -585,6 +645,7 @@
         });
       }
     }
+
     function updateRanks() {
       const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]), medals = ['🥇','🥈','🥉'];
       sorted.forEach(([name], i) => {
@@ -592,9 +653,11 @@
         if (r) r.innerText = medals[i] || ''; if (c) c.classList.toggle('leader', i === 0);
       });
     }
+
     function handleCard(d) { if (isAdmin) openLb(d); else openLogin(d); }
     function openLogin(d) { selectedDept = d; document.getElementById('target-dept').innerText = d; document.getElementById('pass-input').value = ''; document.getElementById('login-modal').style.display = 'flex'; setTimeout(() => document.getElementById('pass-input').focus(), 50); }
     function closeLogin() { document.getElementById('login-modal').style.display = 'none'; }
+
     async function handleLogin(isSilent = false) {
       const p = document.getElementById('pass-input').value; if (!p) return;
       try {
@@ -629,6 +692,7 @@
         } else { localStorage.removeItem('goats_user'); localStorage.removeItem('goats_pass'); if (!isSilent) showToast("❌ Wrong Password"); }
       } catch (e) { if (!isSilent) showToast("❌ Login Error!"); }
     }
+
     async function loadStaffForDept(dept) {
       const sel = document.getElementById('t-name'); sel.innerHTML = '<option value="" disabled selected>👤 Loading staff...</option>';
       try {
@@ -638,6 +702,7 @@
         else { sel.innerHTML = '<option value="" disabled selected>No staff found — Type below</option>'; }
       } catch (e) { sel.innerHTML = '<option value="" disabled selected>👤 Select Your Name</option>'; }
     }
+
     async function processQueue() {
       const q = JSON.parse(localStorage.getItem('goats_queue') || '[]'); if (q.length === 0) return;
       showToast("📡 Syncing " + q.length + " offline points..."); let failed = [];
@@ -645,27 +710,34 @@
       localStorage.setItem('goats_queue', JSON.stringify(failed));
       if (failed.length === 0) showToast("✅ All synced!"); else showToast("⚠️ Some pending.");
     }
+
     async function recordGroup(hInput) { await record(hInput, '', null, true); }
     async function recordIndiv(hInput, sName, sDept = null) { await record(hInput, sName, sDept, false); }
+
     async function record(hInput, sName, sDept, isGroup) {
       if (isAdmin) return;
       const tSel = document.getElementById('t-name'); const teacherName = tSel.value;
       if (!teacherName) { showToast("⚠️ Select your name first!"); if (scanActive) stopCam(); return; }
       const actualH = Object.keys(scores).find(k => k.toLowerCase() === hInput.trim().toLowerCase()); if (!actualH) return;
+
       const tier = isGroup ? currentGroupTier : currentIndivTier;
       const remarksId = isGroup ? 'remarks-group' : 'remarks-indiv';
       const remarks = document.getElementById(remarksId).value.trim();
       const pts = getTierPoints(tier);
+
       scores[actualH] += pts;
       document.getElementById('s-' + actualH).innerText = scores[actualH];
       updateRanks();
+
       if (navigator.vibrate) { try { navigator.vibrate(pts > 0 ? [60, 60, 60] : [250]); } catch (e) {} }
       if (pts > 0) {
         confetti({ particleCount: tier === '1st' ? 120 : tier === '2nd' ? 80 : 40, spread: 70, origin: { y: 0.6 } });
         playBeep('success');
       } else { playBeep('fail'); }
+
       document.body.classList.remove('shake'); void document.body.offsetWidth; document.body.classList.add('shake');
       setTimeout(() => document.body.classList.remove('shake'), 500);
+
       const pop = document.getElementById('paper-popup');
       document.getElementById('pop-status').innerText = pts > 0 ? "🎉 POINT AWARDED 🎉" : "⚠️ POINT DEDUCTED ⚠️";
       document.getElementById('pop-status').style.color = pts > 0 ? "var(--neon)" : "var(--red)";
@@ -679,17 +751,20 @@
       document.getElementById('pop-remarks').innerText = remarks ? `"${remarks}"` : '';
       pop.classList.remove('show'); void pop.offsetWidth; pop.classList.add('show');
       setTimeout(() => pop.classList.remove('show'), 3500);
+
       const payload = {
         dept: currentDept, studentDept: sDept, studentName: sName, teacherName: teacherName,
         category: document.getElementById('p-cat').value, house: actualH,
         type: pts > 0 ? 'Positive' : 'Negative', points: pts, tier: tier, remarks: remarks
       };
       document.getElementById(remarksId).value = '';
+
       if (pendingPayload) { if (undoTimeout) clearTimeout(undoTimeout); executePendingPoint(); }
       pendingPayload = payload;
       const sb = document.getElementById('undo-snackbar'); sb.style.display = 'flex';
       undoTimeout = setTimeout(() => { executePendingPoint(); }, 10000);
     }
+
     async function executePendingPoint() {
       if (!pendingPayload) return;
       const p = pendingPayload; pendingPayload = null;
@@ -703,6 +778,7 @@
         q.push(p); localStorage.setItem('goats_queue', JSON.stringify(q));
       }
     }
+
     function undoPoint() {
       if (undoTimeout) { clearTimeout(undoTimeout); undoTimeout = null; }
       if (pendingPayload) {
@@ -713,6 +789,7 @@
       }
       pendingPayload = null; document.getElementById('undo-snackbar').style.display = 'none';
     }
+
     async function toggleCam() {
       if (!scanActive) {
         document.getElementById('reader').style.display = 'block';
@@ -752,12 +829,14 @@
     function toggleBranding() { const b = document.getElementById('admin-branding'); b.style.display = (b.style.display === 'block') ? 'none' : 'block'; document.getElementById('admin-webapp-form').style.display = 'none'; }
     function toggleWebAppForm() { const b = document.getElementById('admin-webapp-form'); b.style.display = (b.style.display === 'block') ? 'none' : 'block'; document.getElementById('admin-branding').style.display = 'none'; }
     async function forceSync() { showToast("🔄 Syncing..."); await processQueue(); localStorage.removeItem('goats_cache'); await boot(); }
+
     async function saveNewApp() {
       const name = document.getElementById('new-app-name').value, url = document.getElementById('new-app-url').value, icon = document.getElementById('new-app-icon').value || "✨";
       if (!name || !url) { showToast("⚠️ Name and URL required"); return; }
       showToast("Uploading..."); const res = await api({ action: "saveAppLink", data: { name, url, icon } });
       if (res.success) { localStorage.removeItem('goats_cache'); document.getElementById('new-app-name').value = ''; document.getElementById('new-app-url').value = ''; showToast("✅ Linked!"); setTimeout(() => location.reload(), 1000); } else showToast("❌ Failed.");
     }
+
     function handleFile(input, key) {
       if (!input.files[0]) return; const rd = new FileReader();
       rd.onload = async (e) => {
@@ -765,6 +844,7 @@
         if (res.success) { localStorage.removeItem('goats_cache'); showToast("✅ Updated!"); setTimeout(() => location.reload(), 1000); } else showToast("❌ Upload Failed");
       }; rd.readAsDataURL(input.files[0]);
     }
+
     function openLb(dept) {
       lbDept = dept; lbCat = 'ALL'; setLbPeriod('weekly');
       document.getElementById('lb-title').innerText = dept.toUpperCase();
@@ -775,6 +855,7 @@
     function closeLb() { document.getElementById('lb-modal').style.display = 'none'; }
     function setLbCat(cat) { lbCat = cat; document.querySelectorAll('.lb-filter-btn').forEach(b => b.classList.toggle('active', b.innerText === cat)); loadLb(); }
     function setLbPeriod(p) { lbPeriod = p; document.getElementById('btn-period-weekly').className = 'period-btn' + (p === 'weekly' ? ' active' : ''); document.getElementById('btn-period-annually').className = 'period-btn' + (p === 'annually' ? ' active' : ''); loadLb(); }
+
     async function loadLb() {
       const body = document.getElementById('lb-body');
       body.innerHTML = `<div style="height:120px;width:100%;margin-bottom:20px;" class="shimmer"></div><div style="height:45px;width:100%;margin-bottom:10px;" class="shimmer"></div><div style="height:45px;width:100%;margin-bottom:10px;" class="shimmer"></div>`;
@@ -792,6 +873,7 @@
         setTimeout(() => { body.querySelectorAll('.val-bar').forEach(el => { el.style.transform = 'scaleX(1) scaleY(1)'; }); }, 50);
       } catch (e) { body.innerHTML = '<div style="text-align:center;color:red;padding:40px;">Failed to load.</div>'; }
     }
+
     /* ============================================================
        CERTIFICATE SYSTEM LOGIC
     ============================================================ */
@@ -867,11 +949,13 @@
       html += `</body></html>`;
       pw.document.open(); pw.document.write(html); pw.document.close();
     }
+
     async function prepareBulkPrint() {
       showToast("Loading students..."); const res = await api({ action: "getStudentList" }); const pw = window.open('', '_blank');
       pw.document.write(`<!DOCTYPE html><html><head><title>Batch QR</title><style>body{font-family:sans-serif;margin:0;padding:20px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.box{border:1px solid #ddd;padding:10px;text-align:center;page-break-inside:avoid;border-radius:8px}.qr{width:110px;height:110px;margin:5px auto;background:#fff}.lbl{font-size:9px;font-weight:900;text-transform:uppercase;line-height:1.4;margin-top:5px;color:#000}.btn{position:fixed;top:10px;right:10px;padding:12px 24px;background:#000;color:#fbff00;border:none;border-radius:8px;font-weight:900;cursor:pointer}@media print{.btn{display:none}@page{size:A4;margin:1cm}}</style></head><body><button class="btn" onclick="window.print()">PRINT A4 SHEET</button><div class="grid" id="g"></div><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"><\/script><script>function gen(){const ss=${JSON.stringify(res.students)},g=document.getElementById('g');if(typeof QRCode==='undefined'){setTimeout(gen,100);return;}ss.forEach(s=>{const b=document.createElement('div');b.className='box';const q=document.createElement('div');q.className='qr';const l=document.createElement('div');l.className='lbl';l.innerHTML=(s.name||'')+'<br>'+(s.dept||'')+' | '+(s.house||'');b.appendChild(q);b.appendChild(l);g.appendChild(b);try{new QRCode(q,{text:(s.name||'')+' | '+(s.dept||'')+' | '+(s.house||''),width:110,height:110});}catch(e){}});}gen();<\/script></body></html>`);
       pw.document.close();
     }
+
     async function generateReport(period) {
       const pw = window.open('', '_blank'); if (!pw) { showToast("❌ Popup blocked!"); return; }
       pw.document.write(`<html><body style="font-family:sans-serif; text-align:center; margin-top:20vh; background:#111; color:#00ff88;"><h2>Fetching Database...<br><br>Please wait ⏳</h2></body></html>`);
